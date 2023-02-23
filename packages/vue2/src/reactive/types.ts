@@ -39,20 +39,31 @@ export type ReactiveAdapterResult<
   Adapter extends ReactiveAdapterParam<any, any, any, any, any>,
 >
   = Adapter extends ReactiveAdapterParam<infer Instance, infer State, infer Methods, any, infer Events>
-  ? VueReactiveResult<Instance, State, Methods, Events> : {};
+  ? ReactiveResult<Instance, State, Methods, Events> : {};
+
 
 
 /**
  * @category Reactive
  * @hidden
  */
+export type ReactiveLegacyAdapterResult<
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>,
+>
+  = Adapter extends ReactiveAdapterParam<infer Instance, infer State, infer Methods, any, infer Events>
+  ? ReactiveLegacyResult<Instance, State, Methods, Events> : {};
+
+/**
+ * @category Reactive
+ * @hidden
+ */
 export type ReactiveLegacyResult<
-Instance extends ReactiveSubscribe<Record<string, any>>,
-State extends Record<string, any> = ReactiveState<Instance>,
-Methods extends keyof Partial<Instance> = any,
-Events extends Record<string, any> = {},
+  Instance extends ReactiveSubscribe<Record<string, any>>,
+  State extends Record<string, any> = ReactiveState<Instance>,
+  Methods extends keyof Partial<Instance> = any,
+  Events extends Record<string, any> = {},
 > = State & {
-[key in Methods]: Instance[key]
+  [key in Methods]: Instance[key]
 } & ReactiveEvents<Events>;
 
 // Names using framework prefix

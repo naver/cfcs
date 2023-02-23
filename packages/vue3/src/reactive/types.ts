@@ -41,6 +41,15 @@ export type ReactiveLegacyResult<
   [key in Methods]: Instance[key]
 } & ReactiveEvents<Events>;
 
+/**
+ * @category Reactive
+ * @hidden
+ */
+export type ReactiveLegacyAdapterResult<
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>,
+>
+  = Adapter extends ReactiveAdapterParam<infer Instance, infer State, infer Methods, any, infer Events>
+  ? ReactiveLegacyResult<Instance, State, Methods, Events> : {};
 
 /**
  * Get the result type of reactive component through adapter.

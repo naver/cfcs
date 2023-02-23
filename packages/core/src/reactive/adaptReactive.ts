@@ -178,7 +178,7 @@ export function adaptReactive<
       });
     },
     methods() {
-      return withReactiveMethods<any, any, any>(instanceRef, objectAdapter.methods);
+      return withReactiveMethods<any, any, any>(instanceRef, methodNames);
     },
     on(eventName: string, listener: ReactiveEventCallback<any, any>) {
       eventEmitter.on(eventName, listener);
