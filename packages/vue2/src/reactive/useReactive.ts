@@ -61,9 +61,8 @@ export function useReactive<
   const reactiveEvents = adaptResult.events();
   const events = reactiveEvents.reduce((eventResult, name) => {
     eventResult[camelize(`on ${name as any}`)] = (callback: (...args: any[]) => void) => {
-      onMounted(() => {
-        adaptResult.on(name as any, callback as any);
-      });
+      adaptResult.on(name as any, callback as any);
+
       onUnmounted(() => {
         adaptResult.off(name as any, callback as any);
       });
