@@ -1,5 +1,5 @@
 import { EventEmitter } from "@angular/core";
-import { ReactiveAdapter, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
+import { ReactiveAdapterParam, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
 
 type WithPrefix<Prefix extends string, Name extends string> = Prefix extends "" ? Name : `${Prefix}${Capitalize<Name>}`;
 
@@ -31,10 +31,10 @@ export type ReactiveResult<
 > = State & { [key in Methods]: Instance[key] } & ReactiveEvents<Events>;
 
 export type ReactiveAdapterResult<
-  Adapter extends ReactiveAdapter<any, any, any, any, any>,
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>,
   PropertyPrefix extends string = "",
 >
-  = Adapter extends ReactiveAdapter<infer Instance, infer State, infer Methods, any, infer Events>
+  = Adapter extends ReactiveAdapterParam<infer Instance, infer State, infer Methods, any, infer Events>
   ? ReactiveResult<Instance, State, Methods, AngularBindingProperties<Events, PropertyPrefix>> : {};
 
 
@@ -53,5 +53,5 @@ export type AngularReactiveResult<
   Events
 >;
 export type AngularReactiveAdapterResult<
-  Adapter extends ReactiveAdapter<any, any, any, any, any>
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>
 > = ReactiveAdapterResult<Adapter>;

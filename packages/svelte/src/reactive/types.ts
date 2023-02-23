@@ -1,5 +1,5 @@
 import { Writable } from "svelte/store";
-import { ReactiveAdapter, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
+import { ReactiveAdapterParam, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
 
 /**
  * @typedef
@@ -46,9 +46,9 @@ export type ReactiveResult<
  * ```
  */
 export type ReactiveAdapterResult<
-  Adapter extends ReactiveAdapter<any, any, any, any, any>,
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>,
 >
-  = Adapter extends ReactiveAdapter<infer Instance, infer State, infer Methods, any, infer Events>
+  = Adapter extends ReactiveAdapterParam<infer Instance, infer State, infer Methods, any, infer Events>
   ? SvelteReactiveResult<Instance, State, Methods, Events> : {};
 
 
@@ -75,5 +75,5 @@ export type SvelteReactiveResult<
  * @hidden
  */
 export type SvelteReactiveAdapterResult<
-  Adapter extends ReactiveAdapter<any, any, any, any, any>
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>
 > = ReactiveAdapterResult<Adapter>;

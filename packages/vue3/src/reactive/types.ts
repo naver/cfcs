@@ -1,4 +1,4 @@
-import { ReactiveAdapter, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
+import { ReactiveAdapterParam, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
 import { Ref } from "vue";
 
 
@@ -54,9 +54,9 @@ export type ReactiveLegacyResult<
  * ```
  */
 export type ReactiveAdapterResult<
-  Adapter extends ReactiveAdapter<any, any, any, any, any>,
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>,
 >
-  = Adapter extends ReactiveAdapter<infer Instance, infer State, infer Methods, any, infer Events>
+  = Adapter extends ReactiveAdapterParam<infer Instance, infer State, infer Methods, any, infer Events>
   ? VueReactiveResult<Instance, State, Methods, Events> : {};
 
 // Names using framework prefix
@@ -89,5 +89,5 @@ export type VueReactiveResult<
  * @hidden
  */
 export type VueReactiveAdapterResult<
-  Adapter extends ReactiveAdapter<any, any, any, any, any>
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>
 > = ReactiveAdapterResult<Adapter>;

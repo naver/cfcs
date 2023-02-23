@@ -33,7 +33,7 @@
     "dist/*"
   ],
   "dependencies": {
-    "@egjs/component": "^3.0.3"
+    "@egjs/component": "^3.0.4"
   },
   "devDependencies": {
     "@egjs/build-helper": "^0.1.2",

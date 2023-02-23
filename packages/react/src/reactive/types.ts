@@ -1,4 +1,4 @@
-import { ReactiveAdapter, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
+import { ReactiveAdapterParam, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
 
 /**
  * @category Reactive
@@ -31,9 +31,9 @@ export type ReactiveResult<
  * ```
  */
 export type ReactiveAdapterResult<
-  Adapter extends ReactiveAdapter<any, any, any, any, any>,
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>,
 >
-  = Adapter extends ReactiveAdapter<infer Instance, infer State, infer Methods, any, infer Events>
+  = Adapter extends ReactiveAdapterParam<infer Instance, infer State, infer Methods, any, infer Events>
   ? ReactiveResult<Instance, State, Methods, Events> : {};
 
 
@@ -64,5 +64,5 @@ export type ReactReactiveResult<
  * @hidden
  */
 export type ReactReactiveAdapterResult<
-  Adapter extends ReactiveAdapter<any, any, any, any, any>
+  Adapter extends ReactiveAdapterParam<any, any, any, any, any>
 > = ReactiveAdapterResult<Adapter>;

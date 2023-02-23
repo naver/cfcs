@@ -2671,6 +2671,11 @@
   resolved "https://registry.npmjs.org/@egjs/component/-/component-3.0.3.tgz#805dee17d299513abfde8a68a4cd932bb7d4bca9"
   integrity sha512-Pnwxw9mDTvz+j4md6ZlRTpM7jgYoOKlcmjfDgE9okhaAGTqTH0Rl2vIXHOHok5yqYVFR5QXbO31t4x93gavOPQ==
 
+"@egjs/component@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/@egjs/component/-/component-3.0.4.tgz#ad7b53794b2a612806179a188ad828acb9525f61"
+  integrity sha512-sXA7bGbIeLF2OAw/vpka66c6QBBUPcA4UUhR4WGJfnp2XWdiI8QrnJGJMr/UxpE/xnevX9tN3jvNPlW8WkHl3g==
+
 "@egjs/release-helper@^0.2.9":
   version "0.2.9"
   resolved "https://registry.npmjs.org/@egjs/release-helper/-/release-helper-0.2.9.tgz#1b415ca623aaa7b84b2de3be765342393c5a87bc"

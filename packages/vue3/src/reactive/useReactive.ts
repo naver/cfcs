@@ -91,8 +91,9 @@ export function useLegacyReactive<
   Events extends Record<string, any> = {},
 >(
   reactiveAdapter: ReactiveAdapterParam<Instance, State, Methods, Props, Events>,
+  props?: () => Props,
 ): ReactiveLegacyResult<Instance, State, Methods, Events> {
-  const adaptResult = adaptReactive(reactiveAdapter);
+  const adaptResult = adaptReactive(reactiveAdapter, props);
   const reactiveState = adaptResult.state();
   const names = Object.keys(reactiveState);
   let result!: Record<string, any>;
