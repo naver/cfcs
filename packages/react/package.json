@@ -1,6 +1,6 @@
 {
   "name": "@cfcs/react",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "CFCs(Cross Framework Components) are modules that convert components into framework usage for React",
   "main": "dist/cfcs.cjs.js",
   "module": "dist/cfcs.esm.js",
@@ -34,7 +34,7 @@
     "dist/*"
   ],
   "dependencies": {
-    "@cfcs/core": "~0.0.25"
+    "@cfcs/core": "~0.0.26"
   },
   "devDependencies": {
     "@egjs/build-helper": "^0.1.2",
