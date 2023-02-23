@@ -1,4 +1,4 @@
-import { OBSERVERS_PATH } from "./const";
+import { COMPUTED_PATH, OBSERVERS_PATH } from "./const";
 import { Observer } from "./Observer";
 import { ReactiveMethods } from "./types";
 import { isObject, Ref } from "../core";
@@ -51,7 +51,17 @@ export function getObservers(instance: any): Record<string, Observer<any>> {
   if (!instance[OBSERVERS_PATH]) {
     defineObservers(instance);
   }
-  return instance[OBSERVERS_PATH];
+  const observers = instance[OBSERVERS_PATH];
+  const computedList = instance?.constructor?.prototype?.[COMPUTED_PATH];
+
+  if (computedList) {
+    computedList.forEach(name => {
+      if (!(name in observers) && name in instance) {
+        instance[name];
+      }
+    });
+  }
+  return observers;
 }
 
 /**

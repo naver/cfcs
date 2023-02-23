@@ -1,3 +1,4 @@
+import { COMPUTED_PATH } from "../const";
 import { computed } from "../inline";
 import { getObserver, getObservers } from "../utils";
 
@@ -20,6 +21,14 @@ export function Computed(prototype: any, memberName: string, attributes: Propert
     get: getComputed,
   }
 
+  if (COMPUTED_PATH in prototype) {
+    prototype[COMPUTED_PATH] ||= [];
+    const computedList = prototype[COMPUTED_PATH];
+
+    if (computedList.indexOf(memberName) === -1) {
+      computedList.push(memberName);
+    }
+  }
   Object.defineProperty(prototype, memberName, nextAttributes);
 
   return nextAttributes;
