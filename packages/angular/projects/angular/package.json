@@ -1,6 +1,6 @@
 {
   "name": "@cfcs/angular",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "CFCs(Cross Framework Components) are modules that convert components into framework usage for Angular",
   "author": {
     "name": "NAVER Corp."
@@ -21,7 +21,7 @@
     "directive"
   ],
   "dependencies": {
-    "@cfcs/core": "~0.0.24",
+    "@cfcs/core": "~0.0.25",
     "tslib": "^2.3.0"
   }
 }

@@ -18,10 +18,10 @@ const ob2 = observe(1);
 // When
 @ReactiveSubscribe
 class TestComputed {
-    @Computed
-    get ob3() {
-        return ob1.current + ob2.current;
-    }
+  @Computed
+  get ob3() {
+    return ob1.current + ob2.current;
+  }
 }
 const inst = new TestComputed();
 
@@ -34,8 +34,9 @@ ob1.current = 1;
  */
 export function Computed(prototype: any, memberName: string, attributes: PropertyDescriptor): PropertyDescriptor {
   const get = attributes.get!;
+
   function getComputed() {
-    const observers = getObservers(this);
+    const observers = getObservers(this, true);
 
     if (!(memberName in observers)) {
       observers[memberName] = computed(get.bind(this));

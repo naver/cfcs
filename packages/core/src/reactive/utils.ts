@@ -47,19 +47,22 @@ export function defineObservers(instance: any) {
 /**
  * @hidden
  */
-export function getObservers(instance: any): Record<string, Observer<any>> {
+export function getObservers(instance: any, isComputed?: boolean): Record<string, Observer<any>> {
   if (!instance[OBSERVERS_PATH]) {
     defineObservers(instance);
   }
   const observers = instance[OBSERVERS_PATH];
-  const computedList = instance?.constructor?.prototype?.[COMPUTED_PATH];
 
-  if (computedList) {
-    computedList.forEach(name => {
-      if (!(name in observers) && name in instance) {
-        instance[name];
-      }
-    });
+  if (!isComputed) {
+    const computedList = instance?.constructor?.prototype?.[COMPUTED_PATH];
+
+    if (computedList) {
+      computedList.forEach(name => {
+        if (!(name in observers) && name in instance) {
+          instance[name];
+        }
+      });
+    }
   }
   return observers;
 }
