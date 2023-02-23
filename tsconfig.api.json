@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "./packages/core/src/**/*.ts",
+    "./packages/react/src/**/*.ts",
+    "./packages/vue2/src/**/*.ts",
+    "./packages/vue3/src/**/*.ts",
+    "./packages/svelte/src/**/*.ts"
+  ]
+}

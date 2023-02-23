@@ -1,0 +1,24 @@
+---
+title: Reactive Lifecycle
+id: cfcs-reactive-lifecycle
+slug: /cfcs-reactive-lifecycle
+sidebar_position: 4
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+
+CFCs provide several lifecycles and functions, and can be applied to various frameworks by writing usage accordingly.
+![](/tutorials/cfcs-lifecycle.png)
+
+* `created`: Lifecycle that occurs when a component is called (or created).
+  * Initialize `state`, `methods`, and `events` to be exposed.
+* `mounted`: Lifecycle that occurs when a component is mounted.
+  * Connect the events exposed with the events of the instance.
+* `init`: Lifecycle that occurs after registering an event in the mounted Lifecycle.
+  * Initialize the instance.
+* `destroy`: Lifecycle that occurs when a component is destroying.
+  * Disconnect the exposed event and remove the instance.

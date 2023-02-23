@@ -1,0 +1,16 @@
+---
+custom_edit_url: null
+---
+
+# ReactiveAdapterResult
+<div className="doc-side">
+<div className="doc-main-source">
+
+[source](https://github.com/naver/cfcs/blob/b8bcc2f/packages/vue3/src/reactive/types.ts#L32)
+
+</div>
+</div>
+
+```ts
+type ReactiveAdapterResult<Adapter extends ReactiveAdapter<any, any, any, any, any>>= Adapter extends ReactiveAdapter<Instance, State, Methods, any, Events> ? VueReactiveResult<Instance, State, Methods, Events> : {}
+```

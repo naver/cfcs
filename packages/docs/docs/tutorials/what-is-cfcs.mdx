@@ -1,0 +1,83 @@
+---
+title: What is CFCs
+id: what-is-cfcs
+slug: /
+sidebar_position: 1
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+
+CFCs(Cross Framework Components) are modules that convert components into framework usage.
+
+
+To be able to use it in a framework means to use the framework like a framework.
+
+React has a specific usage for React, and Vue has a Vue specific usage.
+
+With CFCs, one code can support multiple frameworks according to the framework's usage.
+
+## Who is it good for?
+
+Many users use frameworks.
+
+If it's a popular framework, it has a lot of components, but the newer the framework, the less components it has.
+
+There are many well-made vanilla modules out there, and many that are not supported by the framework.
+You will mostly choose to use vanilla components through the `mounted` lifecycle. However, this method will not be able to use all functions properly, and there will be components that are not suitable.
+
+We thought about frameworks. Trends change and there is a possibility that we can support other frameworks someday.
+
+1. **If I am a component provider, can I also create all framework components?**
+2. **Is there a way to support existing components in the framework?**
+3. **Can a feature be supported by multiple frameworks simultaneously?**
+
+Then, **`Cross Framework Components`** is recommended.
+
+
+
+## Concepts
+
+Supporting multiple frameworks means that there is code for each framework, and the size can be doubled.
+
+CFCs would like to introduce to you how to support multiple frameworks with one code through Compatible.
+
+
+![](/tutorials/cfcs-compatible.png)
+
+### CFCs Reactive
+CFCs Reactive can support multiple frameworks as a Reactive Component, a utility component that is state-based and does not create a UI.
+
+
+![](/tutorials/cfcs-reactive.png)
+
+
+The Hooks component can provide us with a value for the state by changing the state designated as a Hook by certain conditions.
+
+The state used in Hooks is called **Reactive State**.
+
+
+* [**See Reactive Documents**](https://github.com/naver/cfcs/blob/main/reactive.md)
+
+
+
+#### CFCs Reactive-style components
+* [ImReady](https://github.com/naver/egjs-imready): I'm Ready to check if the images or videos are loaded.
+* [Axes](https://github.com/naver/egjs-axes): You can easily create a UI that responds to user actions.
+* [Conveyer](https://github.com/naver/egjs-conveyer): Drag gestures to your Native Scroll.
+
+### CFCs DOM
+
+CFCs DOM supports various frameworks by delegating the DOM render function to the framework. (Soon)
+
+![](/tutorials/cfcs-dom.png)
+
+
+#### CFCs DOM-style components
+* [Flicking](https://github.com/naver/egjs-flicking): It's reliable, flexible and extendable carousel.
+* [InfiniteGrid](https://github.com/naver/egjs-infinitegrid): Arrange elements including content infinitely according to grid type.
+* [Grid](https://github.com/naver/egjs-grid): Arrange items according to the type of grids.
+* [View 360](https://github.com/naver/egjs-view360): 360° panorama image / video viewer.
+* [View 3D](https://github.com/naver/egjs-view3d): Fast & Customizable glTF 3D model viewer.
+

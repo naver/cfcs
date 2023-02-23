@@ -1,0 +1,197 @@
+---
+title: 6. Use TypeScript
+slug: /best-practice/use-typescript
+sidebar_position: 6
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+
+
+
+### Inline Object Type
+
+By default, if you use an inline object, the type is automatically supported.
+
+You can input the exact type through [`ReactiveObject`](/docs/api/Core/Reactive/Type/ReactiveObject) type.
+
+
+```ts
+import { reactive, ReactiveObject } from "@cfcs/core";
+
+type Object = ReactiveObject<{
+  width: number;
+  height: number;
+}>;
+
+const obj = reactive({
+  width: 0,
+  height: 0,
+});
+```
+
+### Class Object Type
+
+If you use Class, you have to manually add type [`ReactiveSubscribe`](/docs/api/Core/Reactive-Decorator/Function/ReactiveSubscribe) because Decorator doesn't support type.
+
+```ts
+import { ReactiveSubscribe, Observe } from "@cfcs/core";
+
+@ReactiveSubscribe
+class ClassComponent {
+  @Observe width = 0;
+  @Observe height = 0;
+}
+
+interface ClassComponent extends ReactiveSubscribe<{
+  width: number;
+  height: number;
+}> {}
+```
+
+
+### Adapter Type
+
+If only the `state` exists, it is automatically supported without defining the type separately.
+
+If you want to know the types of `event` and `method` and the type of the result value separately, define the type.
+
+To support types, `Instance`, `State`, `Props`, `Events` types are required.
+
+The following code is an example of supporting Type in Adapter.
+
+
+
+```ts
+import {
+  reactive,
+  ReactiveObject,
+  ReactiveSetupAdapter,
+} from "@cfcs/core";
+
+// Instance Type
+// If you use a component of class type, Class itself is InstanceType.
+// type ReactiveComponentInstance = ClassComponent;
+type ReactiveComponentInstance = ReactiveObject<{
+  width: number;
+  height: number;
+  setWidth(width: number): void;
+}>;
+
+// State Type
+interface ReactiveComponentState {
+  width: number;
+  height: number;
+};
+
+// Events Type
+interface ReactiveComponentEvents {
+  resize: Event;
+}
+
+// Props Type
+interface ReactiveComponentProps {
+  startWidth?: number;
+  startHeight?: number;
+}
+
+
+const REACTIVE_ADAPTER: ReactiveSetupAdapter<
+  ReactiveComponentInstance,
+  ReactiveComponentState,
+  "setWidth",
+  ReactiveComponentProps,
+  ReactiveComponentEvents
+> = ({ setMethods, setEvents, getProps, emit, onInit, onDestroy }) => {
+  const props = getProps();
+  setMethods(["setWidth"]);
+  setEvents(["resize"]);
+
+  const obj = reactive({
+    width: props?.startWidth ?? 0,
+    height: props?.startHeight ?? 0,
+    setWidth(width: number) {
+      obj.width = width;
+    },
+  });
+  const onResize = (e: Event) => {
+    obj.width = window.innerWidth;
+    obj.height = window.innerHeight;
+    emit("resize", e);
+  };
+
+  onInit(() => {
+    window.addEventListener("resize", onResize);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener("resize", onResize);
+  });
+
+  return obj;
+};
+```
+
+
+### Frameworks
+
+If the adapter type is set, the type of the return value is automatically set.
+The type of return value can be created through `ReactiveAdapterResult`.
+Also, the return value type is the same as `ReactiveAdapterResult<typeof REACTIVE_ADAPTER>`.
+
+![](/tutorials/cfcs-typescript.png);
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+```tsx
+import { useReactive, ReactiveAdapterResult } from "@cfcs/react";
+
+export type ReacitveComponentResult = ReactiveAdapterResult<typeof REACTIVE_ADAPTER>;
+
+export function useReactiveComponent(props?: ReactiveComponentProps): ReacitveComponentResult {
+  return useReactive(REACTIVE_ADAPTER, () => props);
+}
+```
+</TabItem>
+<TabItem value="vue2">
+
+```tsx
+import { useReactive, ReactiveAdapterResult } from "@cfcs/vue2";
+
+export type ReacitveComponentResult = ReactiveAdapterResult<typeof REACTIVE_ADAPTER>;
+
+export function useReactiveComponent(props?: ReactiveComponentProps): ReacitveComponentResult {
+  return useReactive(REACTIVE_ADAPTER, () => props);
+}
+```
+</TabItem>
+
+<TabItem value="vue3">
+
+```tsx
+import { useReactive, ReactiveAdapterResult } from "@cfcs/vue3";
+
+export type ReacitveComponentResult = ReactiveAdapterResult<typeof REACTIVE_ADAPTER>;
+
+export function useReactiveComponent(props?: ReactiveComponentProps): ReacitveComponentResult {
+  return useReactive(REACTIVE_ADAPTER, () => props);
+}
+```
+</TabItem>
+<TabItem value="svelte">
+
+```tsx
+import { useReactive, ReactiveAdapterResult } from "@cfcs/svelte";
+
+export type ReacitveComponentResult = ReactiveAdapterResult<typeof REACTIVE_ADAPTER>;
+
+export function useReactiveComponent(props?: ReactiveComponentProps): ReacitveComponentResult {
+  return useReactive(REACTIVE_ADAPTER, () => props);
+}
+```
+  </TabItem>
+</FrameworkTabs>

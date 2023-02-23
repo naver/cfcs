@@ -1,0 +1,8 @@
+{
+  "locales": ["ko"],
+  "outDir": "./packages/docs/docs/api/Vue 2",
+  "localesDir": "./packages/docs/i18n/{locale}/docusaurus-plugin-content-docs/current/api/Vue 2",
+  "typedoc": "./config/typedoc-vue2.json",
+  "tsconfig": "./tsconfig.api.json",
+  "baseUrl": "https://github.com/naver/cfcs/"
+}

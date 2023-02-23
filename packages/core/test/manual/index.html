@@ -1,0 +1,13 @@
+
+<script src="../../dist/cfcs.js"></script>
+<script>
+    const ob1 = cfcs.observe(1);
+    const ob2 = cfcs.observe(2);
+    const ob3 = cfcs.computed(() => ob1 + ob2);
+
+
+    ob3.subscribe(value => {
+        console.log(value);
+    });
+    console.log(ob3.current);
+</script>

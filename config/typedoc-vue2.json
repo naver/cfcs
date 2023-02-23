@@ -1,0 +1,16 @@
+{
+  "entryPoints": [
+    "../packages/vue2/src/index.ts",
+  ],
+  "exclude": ["**/*+(.spec|.e2e|.d).ts"],
+  "sourceLinkTemplate": "https://github.com/naver/cfcs/blob/{gitRevision}/{path}#L{line}",
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "externalSymbolLinkMappings": {
+    "@cfcs/core": {},
+    "@egjs/component": {
+      "Component": "https://naver.github.io/egjs-component/"
+    },
+  }
+}

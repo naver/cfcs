@@ -1,0 +1,27 @@
+{
+  "name": "@cfcs/angular",
+  "version": "0.0.22",
+  "description": "CFCs(Cross Framework Components) are modules that convert components into framework usage for Angular",
+  "author": {
+    "name": "NAVER Corp."
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/naver/cfcs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naver/cfcs"
+  },
+  "keywords": [
+    "cfcs",
+    "cfc",
+    "angular",
+    "ngx",
+    "reactive",
+    "hooks",
+    "directive"
+  ],
+  "dependencies": {
+    "@cfcs/core": "~0.0.22",
+    "tslib": "^2.3.0"
+  }
+}

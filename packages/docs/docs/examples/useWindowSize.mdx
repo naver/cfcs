@@ -1,0 +1,195 @@
+---
+title: useWindowSize
+slug: /examples
+sidebar_position: 1
+---
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+
+import { WindowSizeApp } from "./components/WindowSizeApp";
+
+
+
+An example of a Reactive component that gets the browser's window size.
+
+
+If the size of the browser changes, the `width` and `height` state values change.
+
+
+<div className="app-container">
+  <WindowSizeApp />
+</div>
+
+### Reactive Adapter
+
+```js
+import { reactive } from "@cfcs/core";
+
+const REACTIVE_ADAPTER = ({ onInit, onDestroy }) => {
+  const obj = reactive({ width: 0, height: 0 });
+  const callback = () => {
+    obj.width = window.innerWidth;
+    obj.height = window.innerHeight;
+  };
+  onInit(() => {
+    window.addEventListener("resize", callback);
+    callback();
+  });
+
+  onDestroy(() => {
+    window.removeEventListener("resize", callback);
+  });
+
+  return obj;
+};
+```
+
+
+### Frameworks
+
+
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+You can create a Reactive Component by importing the `@cfcs/react` module and using the `useReactive` function.
+<p />
+
+```jsx
+import { useReactive } from "@cfcs/react";
+
+function useWindowSize() {
+  return useReactive(REACTIVE_ADAPTER);
+}
+```
+```jsx
+export function App() {
+  const {
+    width,
+    height,
+    onResize,
+  } = useWindowSize();
+
+  return <div>{width}x{height}</div>;
+}
+```
+
+  </TabItem>
+  <TabItem value="vue2">
+
+You can create a Reactive Component by importing the `@cfcs/vue2` module and using the `useReactive` function.
+
+<p />
+
+
+Use [`@vue/composition-api`](https://github.com/vuejs/composition-api) if you are going to use it in Vue 2.
+
+
+<p />
+
+```sh
+# < 2.7
+$ npm install @cfcs/vue2
+```
+
+```jsx
+import { useReactive } from "@cfcs/vue2";
+
+function useWindowSize() {
+  return useReactive(REACTIVE_ADAPTER);
+}
+```
+```html
+<template>
+    <div>{width}x{height}</div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      width,
+      height,
+    } = useWindowSize();
+
+    return {
+      width,
+      height,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="vue3">
+
+  You can create a Reactive Component by importing the `@cfcs/vue3` module and using the `useReactive` function.
+
+<p />
+
+
+```sh
+# >= 2.7
+$ npm install @cfcs/vue3
+```
+```jsx
+import { useReactive } from "@cfcs/vue3";
+
+function useWindowSize() {
+  return useReactive(REACTIVE_ADAPTER);
+}
+```
+```html
+<template>
+    <div>{width}x{height}</div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      width,
+      height,
+    } = useWindowSize();
+
+    return {
+      width,
+      height,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="svelte">
+
+You can create a Reactive Component by importing the `@cfcs/svelte` module and using the `useReactive` function.
+
+
+<p />
+
+```sh
+$ npm install @cfcs/svelte
+```
+```jsx
+import { useReactive } from "@cfcs/svelte";
+
+function useWindowSize() {
+  return useReactive(REACTIVE_ADAPTER);
+}
+```
+```html
+<script>
+const {
+  width,
+  height,
+} = useWindowSize();
+
+</script>
+<div>{$width}x{$height}</div>
+```
+  </TabItem>
+</FrameworkTabs>

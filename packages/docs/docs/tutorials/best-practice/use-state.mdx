@@ -1,0 +1,187 @@
+---
+title: 1. Use State And Adapter
+slug: /best-practice/use-state
+sidebar_position: 2
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+
+## Use State
+
+You can simply define the state via the [`reactive`](/docs/api/Core/Reactive/Function/reactive) function.
+
+### Inline Object State
+
+```js
+import { reactive } from "@cfcs/core";
+
+const obj = reactive({
+  width: 0,
+  height: 0,
+});
+```
+
+### Class State
+
+If you have a class component that you manage, it is also a good choice to support Reactive in the class component.
+
+Make the class reactive through the class decorator called [`ReactiveSubscribe`](/docs/api/Core/Reactive-Decorator/Function/ReactiveSubscribe).
+
+The state is set through a property decorator called [`Observe`](/docs/api/Core/Reactive-Decorator/Function/Observe).
+
+```js
+import { ReactiveSubscribe, Observe } from "@cfcs/core";
+
+@ReactiveSubscribe
+class ClassComponent {
+  @Observe width = 0;
+  @Observe height = 0;
+}
+
+const obj = new ClassComponent();
+```
+
+## Use Adapter With State
+Reactive Adapter is an intermediate stage code to support the framework.
+
+If you can create an adapter, you can create a reactive component in the framework supported by CFCS.
+
+
+It provides a reactive adapter in the form of a function, and you can complete the adapter by writing the code for the function.
+
+The return value of Adapter returns [inline object](#inline-object-state) or [class instance](#class-state) or void as an instance.
+If void is returned, an instance can be set in the `mounted` lifecycle. See [`Use Lifecycle`](/docs/best-practice/use-lifecycle).
+
+```js
+const REACTIVE_ADAPTER = () => {
+};
+```
+
+[See Function Adapter's setup](/docs/api/Core/Reactive/Interface/ReacitveSetup)
+
+
+The following code is an example of defining `width` and `height` state.
+
+
+And when the state changes, re-rendering occurs in the parent component (or app) that used the component.
+```js
+import { reactive } from "@cfcs/core";
+
+const REACTIVE_ADAPTER = () => {
+  const obj = reactive({
+    width: 0,
+    height: 0,
+  });
+
+  // Changing the state in the created Lifecycle will not cause a re-render.
+  // obj.width = 100;
+  // obj.height = 100;
+
+  return obj;
+};
+```
+
+
+### Frameworks
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+If you don't use the `height` value in the render lifecycle, re-rendering won't happen even if the `height` state changes.
+
+
+```jsx
+import { useReactive } from "@cfcs/react";
+
+export function App() {
+  const {
+    width,
+    // height,
+  } = useReactive(REACTIVE_ADAPTER);
+
+  return <div>{width}</div>;
+}
+```
+</TabItem>
+<TabItem value="vue2">
+
+State in vue is [`ref`](https://vuejs.org/api/reactivity-core.html#ref), and in `setup`, you need to access it as `.value`.
+
+
+```html
+<template>
+  <div>{width}x{height}</div>
+</template>
+<script>
+import { useReactive } from "@cfcs/vue2";
+
+export default {
+  setup() {
+    const {
+      width,
+      height,
+    } = useReactive(REACTIVE_ADAPTER);
+
+    return {
+      width,
+      height,
+    };
+  }
+}
+</script>
+```
+</TabItem>
+
+<TabItem value="vue3">
+
+State in vue is [`ref`](https://vuejs.org/api/reactivity-core.html#ref), and in `setup`, you need to access it as `.value`.
+
+
+
+```html
+<template>
+  <div>{width}x{height}</div>
+</template>
+<script>
+import { useReactive } from "@cfcs/vue3";
+
+export default {
+  setup() {
+    const {
+      width,
+      height,
+    } = useReactive(REACTIVE_ADAPTER);
+
+    return {
+      width,
+      height,
+    };
+  }
+}
+</script>
+```
+</TabItem>
+<TabItem value="svelte">
+
+The state in svelte uses [store](https://svelte.dev/docs#component-format-script-4-prefix-stores-with-$-to-access-their-values) and accesses it with $ to get the value.
+
+```html
+<script>
+import { useReactive } from "@cfcs/svelte";
+
+const {
+  width,
+  height,
+} = useReactive(REACTIVE_ADAPTER);
+
+</script>
+<div>{$width}x{$height}</div>
+```
+
+
+  </TabItem>
+</FrameworkTabs>

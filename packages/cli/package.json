@@ -1,0 +1,49 @@
+{
+  "name": "@cfcs/cli",
+  "version": "0.0.3",
+  "private": true,
+  "description": "Cross Framework Components CLI",
+  "main": "dist/cli.cjs.js",
+  "module": "dist/cli.esm.js",
+  "types": "declaration/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "tsc -p tsconfig.json && print-sizes ./dist"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naver/cfcs"
+  },
+  "author": {
+    "name": "NAVER Corp."
+  },
+  "bin": {
+    "cfcs": "./index.js"
+  },
+  "keywords": [
+    "cfc",
+    "cfcs",
+    "react-hook",
+    "react-hooks",
+    "react-use",
+    "reactive",
+    "hooks"
+  ],
+  "files": [
+    "./*",
+    "dist/*"
+  ],
+  "devDependencies": {
+    "@egjs/build-helper": "^0.1.2",
+    "@types/lerna__package": "^4.0.0",
+    "@types/lerna__project": "^4.0.0",
+    "lerna": "^4.0.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "commander": "^9.4.1",
+    "sync-exec": "^0.6.2"
+  }
+}

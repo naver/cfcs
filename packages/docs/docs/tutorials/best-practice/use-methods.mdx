@@ -1,0 +1,156 @@
+---
+title: 4. Use Methods
+slug: /best-practice/use-methods
+sidebar_position: 5
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+
+In addition to states and events, a method that can be manually controlled is considered essential to a component.
+You can set which functions are exposed with the `setMethods` function.
+
+[See Function Adapter's setup](/docs/api/Core/Reactive/Interface/ReacitveSetup)
+
+
+
+The following code is an example of manually changing the width value through the `setWidth` function.
+
+```js
+import { reactive } from "@cfcs/core";
+
+const REACTIVE_ADAPTER = ({ setMethods, onInit, onDestroy }) => {
+  setMethods(["setWidth"]);
+
+  const obj = reactive({
+    width: 0,
+    height: 0,
+    setWidth(width) {
+      obj.width = width;
+    },
+  });
+  const onResize = e => {
+    obj.width = window.innerWidth;
+    obj.height = window.innerHeight;
+  };
+
+  onInit(() => {
+    window.addEventListener("resize", onResize);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener("resize", onResize);
+  });
+
+  return obj;
+};
+```
+
+
+### Frameworks
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+```jsx
+import { useReactive } from "@cfcs/react";
+
+export function App() {
+  const {
+    width,
+    height,
+    setWidth,
+  } = useReactive(REACTIVE_ADAPTER);
+
+
+  return <div onClick={() => {
+    setWidth(200);
+  }}>{width}x{height}</div>;
+}
+```
+</TabItem>
+<TabItem value="vue2">
+
+```html
+<template>
+  <div @click="onClick">{width}x{height}</div>
+</template>
+<script>
+import { useReactive } from "@cfcs/vue2";
+
+export default {
+  setup() {
+    const {
+      width,
+      height,
+      setWidth,
+    } = useReactive(REACTIVE_ADAPTER);
+
+    const onClick = () => {
+      setWidth(200);
+    };
+    return {
+      width,
+      height,
+      onClick,
+    };
+  }
+}
+</script>
+```
+</TabItem>
+
+<TabItem value="vue3">
+
+```html
+<template>
+  <div @click="onClick">{width}x{height}</div>
+</template>
+<script>
+import { useReactive } from "@cfcs/vue3";
+
+export default {
+  setup() {
+    const {
+      width,
+      height,
+      setWidth,
+    } = useReactive(REACTIVE_ADAPTER);
+
+    const onClick = () => {
+      setWidth(200);
+    };
+    return {
+      width,
+      height,
+      onClick,
+    };
+  }
+}
+</script>
+```
+</TabItem>
+<TabItem value="svelte">
+
+```html
+<script>
+import { useReactive } from "@cfcs/svelte";
+
+const {
+  width,
+  height,
+  setWidth,,
+} = useReactive(REACTIVE_ADAPTER);
+
+</script>
+<div on:click={() => {
+  setWidth(200);
+}}>{$width}x{$height}</div>
+```
+
+
+  </TabItem>
+</FrameworkTabs>

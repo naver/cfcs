@@ -1,0 +1,16 @@
+---
+custom_edit_url: null
+---
+
+# ReactiveLegacyResult
+<div className="doc-side">
+<div className="doc-main-source">
+
+[source](https://github.com/naver/cfcs/blob/b8bcc2f/packages/vue3/src/reactive/types.ts#L23)
+
+</div>
+</div>
+
+```ts
+type ReactiveLegacyResult<Instance extends ReactiveSubscribe<Record>, State extends Record<string, any> = ReactiveState<Instance>, Methods extends keyof Partial<Instance> = any, Events extends Record<string, any> = {}>= State & { [ key in Methods ] :  Instance[key] } & ReactiveEvents<Events>
+```

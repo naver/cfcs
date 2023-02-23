@@ -1,0 +1,8 @@
+{
+  "locales": ["ko"],
+  "outDir": "./packages/docs/docs/api/Svelte",
+  "localesDir": "./packages/docs/i18n/{locale}/docusaurus-plugin-content-docs/current/api/Svelte",
+  "typedoc": "./config/typedoc-svelte.json",
+  "tsconfig": "./tsconfig.api.json",
+  "baseUrl": "https://github.com/naver/cfcs/"
+}

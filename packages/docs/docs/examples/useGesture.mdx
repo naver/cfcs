@@ -1,0 +1,315 @@
+---
+title: useGesture
+slug: /examples/use-gesture
+sidebar_position: 2
+---
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+import { GestureApp } from "./components/GestureApp";
+
+The following example moves a target by dragging.
+
+When dragging, the states of `x` and `y` are changed.
+
+When dragging starts, `holding` state becomes true, and when dragging ends, `holding` changes to false.
+
+
+<div className="app-container">
+  <GestureApp />
+</div>
+
+
+### Reactive Adapter
+
+```js
+const REACTIVE_ADAPTER = ({ setEvents, emit, onInit, onDestroy, getProps }) => {
+  setEvents(["dragStart", "drag", "dragEnd"]);
+  const obj = reactive({
+    x: 0,
+    y: 0,
+    holding: false,
+  });
+  const ref = getProps().ref;
+
+  let startClientX = 0;
+  let startClientY = 0;
+  let startX = 0;
+  let startY = 0;
+
+  const onDragStart = (e) => {
+    obj.holding = true;
+    startClientX = e.clientX;
+    startClientY = e.clientY;
+    startX = obj.x;
+    startY = obj.y;
+    emit("dragStart", e);
+  };
+  const onDrag = e => {
+    if (!obj.holding) {
+      return;
+    }
+    obj.x = startX + e.clientX - startClientX;
+    obj.y = startY + e.clientY - startClientY;
+    emit("drag", e);
+  };
+  const onDragEnd = e => {
+    if (!obj.holding) {
+      return;
+    }
+    emit("dragEnd", e);
+    obj.holding = false;
+  };
+  onInit(() => {
+    const element = ref.value || ref.current;
+    element?.addEventListener("mousedown", onDragStart);
+    window.addEventListener("mousemove", onDrag);
+    window.addEventListener("mouseup", onDragEnd);
+  });
+
+  onDestroy(() => {
+    const element = ref.value || ref.current;
+    element?.removeEventListener("mousedown", onDragStart);
+    window.removeEventListener("mousemove", onDrag);
+    window.removeEventListener("mouseup", onDragEnd);
+  });
+  return obj;
+};
+```
+
+
+### Frameworks
+
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+You can create a Reactive Component by importing the `@cfcs/react` module and using the `useReactive` function.
+<p />
+
+```jsx
+import React from "react";
+import { useReactive } from "@cfcs/react";
+
+function useGesture() {
+  const ref = React.useRef(null);
+
+  return Object.assign(useReactive(ADAPTER, () => ({ ref })), {
+    ref,
+  });
+}
+```
+```jsx
+export function App() {
+  const {
+    ref,
+    x, y, holding,
+    onDragStart,
+    onDrag,
+    onDragEnd,
+  } = useGesture();
+
+  onDragStart(() => {
+    console.log("drag start");
+  }, []);
+  onDrag(() => {
+    console.log("drag");
+  }, []);
+  onDragEnd(() => {
+    console.log("drag end");
+  }, []);
+
+  return <div
+    ref={ref}
+    style={{
+      ...
+      background: holding ? "#8C532E" : "#F5C721",
+      transform: `translate(${x}px, ${y}px`,
+    }}
+  ></div>;
+}
+```
+
+  </TabItem>
+  <TabItem value="vue2">
+
+You can create a Reactive Component by importing the `@cfcs/vue2` module and using the `useReactive` function.
+
+<p />
+
+
+Use [`@vue/composition-api`](https://github.com/vuejs/composition-api) if you are going to use it in Vue 2.
+
+
+<p />
+
+```sh
+# < 2.7
+$ npm install @cfcs/vue2
+```
+
+```jsx
+import { ref } from "@vue/composition-api";
+import { useReactive } from "@cfcs/vue2";
+
+function useGesture() {
+  const imgRef = ref(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref: imgRef })),
+    ref: imgRef,
+  };
+}
+```
+```html
+<template>
+  <div
+    ref="ref"
+    :style="`background: ${holding ? '#8C532E' : '#F5C721'}; transform: translate(${x}px, ${y}px;`"
+  ></div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      ref,
+      x, y, holding,
+      onDragStart,
+      onDrag,
+      onDragEnd,
+    } = useGesture();
+
+    onDragStart(() => {
+      console.log("drag start");
+    });
+    onDrag(() => {
+      console.log("drag");
+    });
+    onDragEnd(() => {
+      console.log("drag end");
+    });
+
+    return {
+      x, y, holding,
+      ref,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="vue3">
+
+  You can create a Reactive Component by importing the `@cfcs/vue3` module and using the `useReactive` function.
+
+<p />
+
+
+```sh
+# >= 2.7
+$ npm install @cfcs/vue3
+```
+
+```jsx
+import { ref } from "vue";
+import { useReactive } from "@cfcs/vue3";
+
+function useGesture() {
+  const imgRef = ref(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref: imgRef })),
+    ref: imgRef,
+  };
+}
+```
+```html
+<template>
+  <div
+    ref="ref"
+    :style="`background: ${holding ? '#8C532E' : '#F5C721'}; transform: translate(${x}px, ${y}px;`"
+  ></div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      ref,
+      x, y, holding,
+      onDragStart,
+      onDrag,
+      onDragEnd,
+    } = useGesture();
+
+    onDragStart(() => {
+      console.log("drag start");
+    });
+    onDrag(() => {
+      console.log("drag");
+    });
+    onDragEnd(() => {
+      console.log("drag end");
+    });
+
+    return {
+      x, y, holding,
+      ref,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="svelte">
+
+You can create a Reactive Component by importing the `@cfcs/svelte` module and using the `useReactive` function.
+
+
+<p />
+
+```sh
+$ npm install @cfcs/svelte
+```
+```jsx
+import { useReactive, useRef } from "@cfcs/vue3";
+
+function useGesture() {
+  const ref = useRef(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref })),
+    ref,
+  };
+}
+```
+
+```html
+<script>
+const {
+  ref: targetRef,
+  x, y, holding,
+  onDragStart,
+  onDrag,
+  onDragEnd,
+} = useGesture();
+
+onDragStart(() => {
+  console.log("drag start");
+});
+onDrag(() => {
+  console.log("drag");
+});
+onDragEnd(() => {
+  console.log("drag end");
+});
+</script>
+<div
+  use:targetRef
+  style={`background: ${$holding ? "#8C532E" : "#F5C721"}; transform: translate(${$x}px, ${$y}px;`}
+></div>
+```
+  </TabItem>
+</FrameworkTabs>

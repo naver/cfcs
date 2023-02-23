@@ -1,0 +1,227 @@
+---
+title: useImageOnLoad
+slug: /examples/use-image-on-load
+sidebar_position: 2
+---
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+import { ImageOnLoadApp } from "./components/ImageOnLoadApp";
+
+
+Indicates whether the image has been loaded.
+
+When ready, the state `isLoaded` changes to `true`.
+
+
+<div className="app-container">
+  <ImageOnLoadApp />
+</div>
+
+### Reactive Adapter
+
+```js
+const REACTIVE_ADAPTER = ({ onInit, onDestroy, getProps }) => {
+  const obj = reactive({ isLoaded: false });
+  const ref = getProps().ref;
+
+  const onLoaded = () => {
+    const element = ref.value || ref.current;
+
+    obj.isLoaded = !!(element.naturalWidth && element.complete);
+  };
+  onInit(() => {
+    const element = ref.value || ref.current;
+
+    element?.addEventListener("load", onLoaded);
+    onLoaded();
+  });
+
+  onDestroy(() => {
+    const element = ref.value || ref.current;
+
+    element?.removeEventListener("load", onLoaded);
+  });
+  return obj;
+};
+```
+
+
+### Frameworks
+
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+You can create a Reactive Component by importing the `@cfcs/react` module and using the `useReactive` function.
+<p />
+
+```jsx
+import React from "react";
+import { useReactive } from "@cfcs/react";
+
+function useImageOnLoad() {
+  const ref = React.useRef(null);
+
+  return Object.assign(useReactive(REACTIVE_ADAPTER, () => ({ ref })), {
+    ref,
+  });
+}
+```
+```jsx
+export function App() {
+  const { isLoaded, ref } = useImageOnLoad();
+
+  return <div>
+    Loaded: {isLoaded ? "loaded" : "loading..."} <br />
+    <img src="your image src" ref={ref} />
+  </div>;
+}
+```
+
+  </TabItem>
+  <TabItem value="vue2">
+
+You can create a Reactive Component by importing the `@cfcs/vue2` module and using the `useReactive` function.
+
+<p />
+
+
+Use [`@vue/composition-api`](https://github.com/vuejs/composition-api) if you are going to use it in Vue 2.
+
+
+<p />
+
+```sh
+# < 2.7
+$ npm install @cfcs/vue2
+```
+
+```jsx
+import { ref } from "@vue/composition-api";
+import { useReactive } from "@cfcs/vue2";
+
+function useImageOnLoad() {
+  const imgRef = ref(null);
+
+  return {
+    ...useReactive(REACTIVE_ADAPTER, () => ({ ref: imgRef })),
+    ref: imgRef,
+  };
+}
+```
+```html
+<template>
+  <div>
+    Loaded: {{isLoaded ? "loaded" : "loading..."}} <br />
+    <img src="your image src" ref="ref" />
+  </div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      isLoaded,
+      ref,
+    } = useImageOnLoad();
+
+    return {
+      isLoaded,
+      ref,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="vue3">
+
+  You can create a Reactive Component by importing the `@cfcs/vue3` module and using the `useReactive` function.
+
+<p />
+
+
+```sh
+# >= 2.7
+$ npm install @cfcs/vue3
+```
+
+```jsx
+import { ref } from "vue";
+import { useReactive } from "@cfcs/vue3";
+
+function useImageOnLoad() {
+  const imgRef = ref(null);
+
+  return {
+    ...useReactive(REACTIVE_ADAPTER, () => ({ ref: imgRef })),
+    ref: imgRef,
+  };
+}
+```
+
+```html
+<template>
+  <div>
+    Loaded: {{isLoaded ? "loaded" : "loading..."}} <br />
+    <img src="your image src" ref="ref" />
+  </div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      isLoaded,
+      ref,
+    } = useImageOnLoad();
+
+    return {
+      isLoaded,
+      ref,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="svelte">
+
+You can create a Reactive Component by importing the `@cfcs/svelte` module and using the `useReactive` function.
+
+
+<p />
+
+```sh
+$ npm install @cfcs/svelte
+```
+```jsx
+import { useReactive, useRef } from "@cfcs/vue3";
+
+function useImageOnLoad() {
+  const ref = useRef(null);
+
+  return {
+    ...useReactive(REACTIVE_ADAPTER, () => ({ ref })),
+    ref,
+  };
+}
+```
+
+```html
+<script>
+const {
+  ref: imgRef,
+  isLoaded,
+} = useImageOnLoad();
+
+</script>
+<div>
+  Loaded: {$isLoaded ? "loaded" : "loading..."} <br />
+  <img src="your image src" use:imgRef />
+</div>
+```
+  </TabItem>
+</FrameworkTabs>

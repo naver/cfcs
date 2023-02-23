@@ -1,0 +1,67 @@
+@font-face
+{
+  font-family: 'Staatliches';
+  font-weight: normal;
+  font-style: normal;
+  src: url('/font/Staatliches/Staatliches-Regular.ttf');
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+main {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: normal;
+}
+
+main a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+}
+
+main a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.header-github-link:hover,
+.header-npm-link:hover {
+  opacity: 0.6;
+}
+
+.header-github-link::before,
+.header-npm-link::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+}
+
+.header-github-link {
+  margin-right: 0.5rem;
+}
+
+.header-github-link::before {
+  background: url("../../static/icon/github.svg") no-repeat;
+}
+
+html[data-theme='dark'] .header-github-link::before {
+  background: url("../../static/icon/github_white.svg") no-repeat;
+}
+
+.header-npm-link::before {
+  background: url("../../static/icon/npm.svg") no-repeat;
+}
+
+
+.framework-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.framework-wrapper svg {
+  margin-right: 0.25rem;
+}

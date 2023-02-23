@@ -1,0 +1,185 @@
+---
+title: 2. Use Lifecycle
+slug: /best-practice/use-lifecycle
+sidebar_position: 3
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+Lifecycle Hooks are provided for the [first argument](/docs/api/Core/Reactive/Interface/ReacitveSetup) of the function.
+
+* `created` is equivalent to calling a function.
+* `mounted` => `onMounted`
+* `init` => `onInit`
+* `destroy` => `onDestroy`
+
+
+
+
+`onInit` (or `onMounted`) and `onDestroy` must match. If it is registered in `onInit`, it must be released in `onDestroy`.
+
+[See Lifecycle Documents](/docs/cfcs-reactive-lifecycle)
+
+In Strict Mode development environment of React 18 will occur in the order.
+
+1. `created` => `created`
+2. `mounted` => `init`
+3. `destroy`
+4. `mounted` => `init`
+
+
+
+If you don't return an instance in the `created` lifecycle, you should return an instance in `mounted`.
+And you have to tell it the initial value of the state via the `setInitialState` function.
+
+```js
+import { reactive } from "@cfcs/core";
+
+const REACTIVE_ADAPTER = ({ setInitialState, onMounted }) => {
+  setInitialState({
+    width: 0,
+    height: 0,
+  });
+
+  onMounted(() => {
+    const obj = reactive({
+      width: 0,
+      height: 0,
+    });
+
+    return obj;
+  });
+```
+
+The following code changes the `width` and `height` state to 100 after 1 second.
+
+```js
+import { reactive } from "@cfcs/core";
+
+const REACTIVE_ADAPTER = ({ onInit, onDestroy }) => {
+  const obj = reactive({
+    width: 0,
+    height: 0,
+  });
+
+  let timerId = 0;
+
+  onInit(() => {
+    // enable timer
+    timerId = setTimeout(() => {
+      obj.width = 100;
+      obj.height = 100;
+    }, 1000);
+  });
+
+  onDestroy(() => {
+    // disable timer
+    clearTimeout(timerId);
+  });
+
+
+  return obj;
+};
+```
+
+
+### Frameworks
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+```jsx
+import { useReactive } from "@cfcs/react";
+
+export function App() {
+  const {
+    width,
+    height,
+  } = useReactive(REACTIVE_ADAPTER);
+
+  return <div>{width}x{height}</div>;
+}
+```
+</TabItem>
+<TabItem value="vue2">
+
+State in vue is [`ref`](https://vuejs.org/api/reactivity-core.html#ref), and in `setup`, you need to access it as `.value`.
+
+
+```html
+<template>
+  <div>{width}x{height}</div>
+</template>
+<script>
+import { useReactive } from "@cfcs/vue2";
+
+export default {
+  setup() {
+    const {
+      width,
+      height,
+    } = useReactive(REACTIVE_ADAPTER);
+
+    return {
+      width,
+      height,
+    };
+  }
+}
+</script>
+```
+</TabItem>
+
+<TabItem value="vue3">
+
+State in vue is [`ref`](https://vuejs.org/api/reactivity-core.html#ref), and in `setup`, you need to access it as `.value`.
+
+
+
+```html
+<template>
+  <div>{width}x{height}</div>
+</template>
+<script>
+import { useReactive } from "@cfcs/vue3";
+
+export default {
+  setup() {
+    const {
+      width,
+      height,
+    } = useReactive(REACTIVE_ADAPTER);
+
+    return {
+      width,
+      height,
+    };
+  }
+}
+</script>
+```
+</TabItem>
+<TabItem value="svelte">
+
+The state in svelte uses [store](https://svelte.dev/docs#component-format-script-4-prefix-stores-with-$-to-access-their-values) and accesses it with $ to get the value.
+
+```html
+<script>
+import { useReactive } from "@cfcs/svelte";
+
+const {
+  width,
+  height,
+} = useReactive(REACTIVE_ADAPTER);
+
+</script>
+<div>{$width}x{$height}</div>
+```
+
+
+  </TabItem>
+</FrameworkTabs>
+
