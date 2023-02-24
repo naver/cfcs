@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { ReactiveSubscribe, ReactiveAdapterParam, camelize, adaptReactive, ReactiveState } from "@cfcs/core";
 import { onDestroy, onMount } from "svelte/internal";
 import { writable, Writable } from "svelte/store";

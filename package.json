@@ -15,7 +15,7 @@
     "docs:vue3": "typedoc-to-mdx -c ./config/ttmdx-vue3.json",
     "docs:svelte": "typedoc-to-mdx -c ./config/ttmdx-svelte.json",
     "demo:build": "npm run docs:build && npm run packages:build && npm run build --prefix packages/docs",
-    "demo:deploy": "lerna-helper deploy --base @cfcs/core --remote origin",
+    "demo:deploy": "lerna-helper deploy --base @cfcs/core --remote upstream",
     "release": "lerna-helper release --base @cfcs/core --remote upstream --branch main"
   },
   "devDependencies": {

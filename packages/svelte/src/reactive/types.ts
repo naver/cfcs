@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { Writable } from "svelte/store";
 import { ReactiveAdapterParam, ReactiveEventParameters, ReactiveState, ReactiveSubscribe } from "@cfcs/core";
 

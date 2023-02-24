@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { COMPUTED_PATH, OBSERVERS_PATH } from "./const";
 import { Observer } from "./Observer";
 import { ReactiveMethods } from "./types";

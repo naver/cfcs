@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { COMPUTED_PATH } from "../const";
 import { computed } from "../inline";
 import { getObserver, getObservers } from "../utils";

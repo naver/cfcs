@@ -1,7 +1,12 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { Project } from "@lerna/project";
 import { Package } from "@lerna/package";
+
 const exec = require('sync-exec');
-const { updateLockfileVersion } = require("@lerna/version/lib/update-lockfile-version");
 
 let project!: Project;
 let rootPackage!: Package;

@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import Component from "@egjs/component";
 import { getCurrentDetected } from "./detectDependencies";
 

@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { EventKey, EventTriggerParams } from "@egjs/component/declaration/types";
 import { ReactiveEventCallback, ReactiveState } from "./types";
 import { ReactiveSubscribe } from "./decorators/ReactiveSubscribe";

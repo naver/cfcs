@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { EventEmitter } from "@angular/core";
 import { ReactiveSubscribe, ReactiveAdapterParam, camelize, adaptReactive, ReactiveState } from "@cfcs/core";
 

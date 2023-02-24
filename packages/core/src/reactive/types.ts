@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { ComponentEvent } from "@egjs/component";
 import { Observer } from "./Observer";
 import { ReactiveSubscribe } from "./decorators/ReactiveSubscribe";

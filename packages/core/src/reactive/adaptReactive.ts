@@ -1,3 +1,8 @@
+/**
+ * cfcs
+ * Copyright (c) 2022-present NAVER Corp.
+ * MIT license
+ */
 import { isFunction, keys } from "../core";
 import { Ref } from "../core/types";
 import { ReactiveAdapter, ReactiveAdapterParam } from "./ReactiveAdapter";
