@@ -29,7 +29,7 @@ const data: Array<{
     thumb: "imready.png",
     type: "reactive",
     corePath: "main/packages/imready/src/reactive.ts",
-    reactPath: "main/packages/react-imready/src/react-imready/useImReady.ts",
+    reactPath: "main/packages/react-imready/src/react-imready/useImReady.tsx",
     vue2Path: "main/packages/vue2-imready/src/useImReady.ts",
     vue3Path: "main/packages/vue-imready/src/vue-imready/useImReady.ts",
     sveltePath: "main/packages/svelte-imready/src/svelte-imready/useImReady.ts",
