@@ -10,6 +10,9 @@ import TabItem from "@theme/TabItem";
 import CodeBlock from "@theme/CodeBlock";
 import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
 
+
+**Reactive State** refers to a state that changes according to a specific condition.
+
 ### ⚙️ Installation
 ```sh
 $ npm install @cfcs/core
@@ -17,31 +20,37 @@ $ npm install @cfcs/core
 
 ### Reactive State
 
-
 `Reactive State` is a great extension for `Vanilla` as well.
 
 Because you can get properties that can be obtained from events in one `Reactive State`.
 
+If you can get properties through events you would use something like this:
+
 ```js
 // AS-IS
-// If you can get properties through events you would use something like this:
 inst.on("event1", e => {
   console.log(e.prop1);
 });
 inst.on("event2", e => {
   console.log(e.prop1);
 });
+```
 
+If you want to directly detect the state value, you can use it in the following way.
+
+```js
 // TO-BE
-// However, if it can be detected directly through the property value, it will be easy to figure out.
 inst.subscribe("prop1", nextValue => {
   console.log(nextValue);
 });
 ```
 
+In this case, state detection is more intuitive than event detection.
+
+
 * Class
-  * `ReactiveSubscribe` is a class decorator and adds `.subscribe` and `.unsubscribe` methods.
-  * `Observe` is a property decorator and converts the property into a `reactive state`. You can detect its status through `.subscribe`.
+  * [`ReactiveSubscribe`](/docs/api/Core/Reactive-Decorator/Function/ReactiveSubscribe) is a class decorator and adds `.subscribe` and `.unsubscribe` methods.
+  * [`Observe`](/docs/api/Core/Reactive-Decorator/Function/Observe) is a property decorator and converts the property into a `reactive state`. You can detect its status through `.subscribe`.
 ```ts
 import { ReactiveSubscribe, Observe } from "@cfcs/core";
 
@@ -73,7 +82,9 @@ component.subscribe("value1", nextValue => {
 ```
 
 * Inline Object
-  * `reactive` converts the object into a reactive object, and values can be changed through `.subscribe`.
+  * [`reactive`](/docs/api/Core/Reactive/Function/reactive) converts the object into a reactive object, and values can be changed through `.subscribe`.
+
+
 ```js
 import { reactive } from "@cfcs/core";
 

@@ -47,9 +47,10 @@ inst.subscribe("prop1", nextValue => {
 
 In this case, state detection is more intuitive than event detection.
 
-* Class
-  * `ReactiveSubscribe` is a class decorator and adds `.subscribe` and `.unsubscribe` methods.
-  * `Observe` is a property decorator and converts the property into a `reactive state`. You can detect its status through `.subscribe`.
+
+#### Class State
+  * [`ReactiveSubscribe`](https://naver.github.io/cfcs/docs/api/Core/Reactive-Decorator/Function/ReactiveSubscribe) is a class decorator and adds `.subscribe` and `.unsubscribe` methods.
+  * [`Observe`](https://naver.github.io/cfcs/docs/api/Core/Reactive-Decorator/Function/Observe) is a property decorator and converts the property into a `reactive state`. You can detect its status through `.subscribe`.
 ```ts
 import { ReactiveSubscribe, Observe } from "@cfcs/core";
 
@@ -80,8 +81,10 @@ component.subscribe("value1", nextValue => {
 });
 ```
 
-* Inline Object
-  * `reactive` converts the object into a reactive object, and values can be changed through `.subscribe`.
+### Inline Object State
+  * [`reactive`](https://naver.github.io/cfcs/docs/api/Core/Reactive/Function/reactive) converts the object into a reactive object, and values can be changed through `.subscribe`.
+
+
 ```js
 import { reactive } from "@cfcs/core";
 
@@ -102,6 +105,7 @@ obj.subscribe("value1", nextValue => {
 obj.value1 = 2;
 ```
 
+
 ### Compatiable for Frameworks
 
 Even if a vanilla component is created, it cannot be applied to the framework as it is. This is because the usage method is different for each framework.
@@ -121,6 +125,27 @@ CFCs provide several lifecycles and functions, and can be applied to various fra
 * `destroy`: Lifecycle that occurs when a component is destroying.
   * Disconnect the exposed event and remove the instance.
 
+
+
+### Write Reactive Adapter
+
+Reactive Adapter is an intermediate stage code to support the framework.
+
+If you can create an adapter, you can create a reactive component in the framework supported by CFCS.
+
+It provides a reactive adapter in the form of a function, and you can complete the adapter by writing the code for the function.
+
+The return value of Adapter returns `inline object state` or `class state` or void as an instance.
+If void is returned, an instance can be set in the `mounted` lifecycle. See [`Use Lifecycle`](https://naver.github.io/cfcs/docs/best-practice/use-lifecycle).
+
+```js
+const REACTIVE_ADAPTER = () => {
+};
+```
+
+[See Function Adapter's setup](https://naver.github.io/cfcs/docs/api/Core/Reactive/Interface/ReacitveSetup)
+
+The following code is a simple example to introduce the relationship between Adapter and Frameworks. If you want to create CFCs Adapter, refer to the [Best Practice](https://naver.github.io/cfcs/docs/best-practice) document.
 
 ```ts
 import { reactive } from "@cfcs/core";
