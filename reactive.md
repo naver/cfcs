@@ -24,22 +24,28 @@ $ npm install @cfcs/core
 
 Because you can get properties that can be obtained from events in one `Reactive State`.
 
+If you can get properties through events you would use something like this:
+
 ```js
 // AS-IS
-// If you can get properties through events you would use something like this:
 inst.on("event1", e => {
   console.log(e.prop1);
 });
 inst.on("event2", e => {
   console.log(e.prop1);
 });
+```
 
+If you want to directly detect the state value, you can use it in the following way.
+
+```js
 // TO-BE
-// However, if it can be detected directly through the property value, it will be easy to figure out.
 inst.subscribe("prop1", nextValue => {
   console.log(nextValue);
 });
 ```
+
+In this case, state detection is more intuitive than event detection.
 
 * Class
   * `ReactiveSubscribe` is a class decorator and adds `.subscribe` and `.unsubscribe` methods.
@@ -97,17 +103,24 @@ obj.value1 = 2;
 ```
 
 ### Compatiable for Frameworks
+
 Even if a vanilla component is created, it cannot be applied to the framework as it is. This is because the usage method is different for each framework.
 
 So, to support vanilla components in the framework, CFCs provide compatible adapters.
 
 CFCs provide several lifecycles and functions, and can be applied to various frameworks by writing usage accordingly.
+
 ![](./images/cfcs-lifecycle.png)
 
 * `created`: Lifecycle that occurs when a component is called (or created).
+  * Initialize `state`, `methods`, and `events` to be exposed.
 * `mounted`: Lifecycle that occurs when a component is mounted.
+  * Connect the events exposed with the events of the instance.
 * `init`: Lifecycle that occurs after registering an event in the mounted Lifecycle.
+  * Initialize the instance.
 * `destroy`: Lifecycle that occurs when a component is destroying.
+  * Disconnect the exposed event and remove the instance.
+
 
 ```ts
 import { reactive } from "@cfcs/core";
