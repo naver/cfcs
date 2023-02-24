@@ -143,7 +143,7 @@ const REACTIVE_ADAPTER = () => {
 };
 ```
 
-[See Function Adapter's setup](https://naver.github.io/cfcs/docs/api/Core/Reactive/Interface/ReacitveSetup)
+[See Function Adapter's setup](https://naver.github.io/cfcs/docs/api/Core/Reactive/Interface/ReactiveSetup)
 
 The following code is a simple example to introduce the relationship between Adapter and Frameworks. If you want to create CFCs Adapter, refer to the [Best Practice](https://naver.github.io/cfcs/docs/best-practice) document.
 

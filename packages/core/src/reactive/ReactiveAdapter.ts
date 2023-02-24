@@ -11,7 +11,7 @@ import { ReactiveSubscribe } from "./decorators/ReactiveSubscribe";
  * Function type Reactive Adapter's first argument setup
  * @category Reactive
  */
-export interface ReacitveSetup<
+export interface ReactiveSetup<
   Instance extends ReactiveSubscribe<Record<string, any>>,
   State extends Record<string, any> = ReactiveState<Instance>,
   Methods extends keyof Partial<Instance> = never,
@@ -94,7 +94,7 @@ export type ReactiveSetupAdapter<
   Methods extends keyof Partial<Instance> = never,
   Props = any,
   Events extends Record<string, any> = {},
-> = (setup: ReacitveSetup<Instance, State, Methods, Props, Events>) => Instance | undefined | void;
+> = (setup: ReactiveSetup<Instance, State, Methods, Props, Events>) => Instance | undefined | void;
 
 /**
  * Object type Reactive Adapter
@@ -133,7 +133,7 @@ export interface ReactiveAdapter<
    * You can use lifecycle hooks functions for setup.
    * You can omit created, mounted, and init.
    */
-  setup?(setup: ReacitveSetup<Instance, State, Methods, Props, Events>): Instance | undefined | void;
+  setup?(setup: ReactiveSetup<Instance, State, Methods, Props, Events>): Instance | undefined | void;
   /**
    * Occurs when a component is created.
    * If an instance is created and returned, the state specification can be omitted.
