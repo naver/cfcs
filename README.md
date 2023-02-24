@@ -67,7 +67,7 @@ This meant that if you doubled the number of frameworks you wanted to support, t
 
 With **CFCs**, you can use Compatible to support multiple frameworks with **just one code**.
 
-/images/cfcs-compatible.png)
+![](https://raw.githubusercontent.com/naver/cfcs/main/images/cfcs-compatible.png)
 
 ### CFCs Reactive
 
