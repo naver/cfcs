@@ -36,19 +36,12 @@ CFCs Reactive can support multiple frameworks as a Reactive Component, a utility
 ![](https://raw.githubusercontent.com/naver/cfcs/main/images/cfcs-reactive.png)
 
 
-The Hooks component can provide us with a value for the state by changing the state designated as a Hook by certain conditions.
+**Reactive State** is a state that changes according to a specific condition.
 
-The state used in Hooks is called **Reactive State**.
+You can detect state changes and also create a UI that changes based on conditions.
 
 
 * [**See Reactive Documents**](https://github.com/naver/cfcs/blob/main/reactive.md)
-
-### CFCs DOM
-
-CFCs DOM supports various frameworks by delegating the DOM render function to the framework. (Soon)
-
-![](https://raw.githubusercontent.com/naver/cfcs/main/images/cfcs-dom.png)
-
 
 
 ## 📦 Packages

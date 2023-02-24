@@ -6,7 +6,7 @@
   <a href="#">Cross Framework Components</a>
 </h2>
 
-<p align="center">CFCs(Cross Framework Components) are modules that convert components into framework usage.</p>
+<p align="center">Write once, create framework components that supports React, Vue, Svelte, and more.</p>
 
 
 <p align="middle">
@@ -24,50 +24,55 @@
 
 ## Description
 
+Many users use JavaScript frameworks and create or use components available in the framework.
 
-To be able to use it in a framework means to use the framework like a framework.
+However, if the component you want doesn't exist, you may have to find it externally or create it yourself.
 
-React has a specific usage for React, and Vue has a Vue specific usage.
+Have you ever wanted to use Vanilla components in React or React components in Vue?
 
-With CFCs, one code can support multiple frameworks according to the framework's usage.
+In order to support these JavaScript frameworks, the developers of JS libraries had to learn how to use each framework, and write and maintain code for each framework separately.
 
-## Who is it good for?
+**CFCs**(Cross Framework Components) were developed to solve these problems.
+With **CFCs**, **one code** can support multiple frameworks according to the framework's usage.
 
-Many users use frameworks.
+## Who should use this library?
 
-If it's a popular framework, it has a lot of components, but the newer the framework, the less components it has.
+In today's web front-end development, JavaScript frameworks have become very important.
 
-There are many well-made vanilla modules out there, and many that are not supported by the framework.
-You will mostly choose to use vanilla components through the `mounted` lifecycle. However, this method will not be able to use all functions properly, and there will be components that are not suitable.
+The problem is that even though there are many great components, there are cases where JavaScript frameworks are not supported. Even newer JavaScript frameworks stand out even more.
 
-We thought about frameworks. Trends change and there is a possibility that we can support other frameworks someday.
+Typically, you can call these libraries using the `mounted` lifecycle supported by frameworks, but often you won't be able to use some of their features or even use them at all.
 
-1. **If I am a component provider, can I also create all framework components?**
-2. **Is there a way to support existing components in the framework?**
-3. **Can a feature be supported by multiple frameworks simultaneously?**
 
-Then, **`Cross Framework Components`** is recommended.
 
+For those who have had such experiences, we recommend using CFC.
+In particular, we recommend **CFCs** if you:
+
+
+1. **You want to develop a component to support various JavaScript frameworks.**
+2. **You want to support an existing component to the JavaScript framework**
 
 
 
 ## Concepts
-Supporting multiple frameworks means that there is code for each framework, and the size can be doubled.
+Previously, if you wanted to support different JavaScript frameworks, you had to write code for each one separately.
 
-CFCs would like to introduce to you how to support multiple frameworks with one code through Compatible.
+This meant that if you doubled the number of frameworks you wanted to support, the maintenance cost is also doubled.
+
+With **CFCs**, you can use Compatible to support multiple frameworks with **just one code**.
 
 ![](./images/cfcs-compatible.png)
 
 ### CFCs Reactive
 
-CFCs Reactive can support multiple frameworks as a Reactive Component, a utility component that is state-based and does not create a UI.
+**CFCs Reactive** can support multiple frameworks as a Reactive Component, a utility component that is state-based and does not create a UI.
 
 ![](./images/cfcs-reactive.png)
 
 
-The Hooks component can provide us with a value for the state by changing the state designated as a Hook by certain conditions.
+**Reactive State** is a state that changes according to a specific condition.
 
-The state used in Hooks is called **Reactive State**.
+You can detect state changes and also create a UI that changes based on conditions.
 
 
 * [**See Reactive Documents**](https://github.com/naver/cfcs/blob/main/reactive.md)
@@ -78,20 +83,6 @@ The state used in Hooks is called **Reactive State**.
 * [ImReady](https://github.com/naver/egjs-imready): I'm Ready to check if the images or videos are loaded.
 * [Axes](https://github.com/naver/egjs-axes): You can easily create a UI that responds to user actions.
 * [Conveyer](https://github.com/naver/egjs-conveyer): Drag gestures to your Native Scroll.
-
-### CFCs DOM
-
-CFCs DOM supports various frameworks by delegating the DOM render function to the framework. (Soon)
-
-![](./images/cfcs-dom.png)
-
-
-#### CFCs DOM-style components
-* [Flicking](https://github.com/naver/egjs-flicking): It's reliable, flexible and extendable carousel.
-* [InfiniteGrid](https://github.com/naver/egjs-infinitegrid): Arrange elements including content infinitely according to grid type.
-* [Grid](https://github.com/naver/egjs-grid): Arrange items according to the type of grids.
-* [View 360](https://github.com/naver/egjs-view360): 360° panorama image / video viewer.
-* [View 3D](https://github.com/naver/egjs-view3d): Fast & Customizable glTF 3D model viewer.
 
 
 ## 📦 Packages

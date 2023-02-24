@@ -8,7 +8,12 @@ CFCs Reactive can support multiple frameworks as a Reactive Component, a utility
 
 ![](./images/cfcs-reactive.png)
 
-**Reactive State** refers to a state that changes according to a specific condition.
+
+
+**Reactive State** is a state that changes according to a specific condition.
+
+You can detect state changes and also create a UI that changes based on conditions.
+
 
 ## 🏃 How to use
 

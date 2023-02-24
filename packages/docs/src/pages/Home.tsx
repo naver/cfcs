@@ -86,11 +86,11 @@ export default () => {
               <p>Write how you already know how to use your component, and it supports a variety of frameworks. There is no need to duplicate code for each framework.</p>
             </div>
             <div className="home-column">
-              <h2>Support Frameworks</h2>
+              <h2>Use Anywhere</h2>
               <p>CFCs make them framework components without compromising the framework's component-guided usage.</p>
             </div>
             <div className="home-column">
-              <h2>Support TypeScript</h2>
+              <h2>With TypeScript</h2>
               <p>All source code is written in Typescript. From Events, Methods, and State, Type is supported with usage suitable for the framework.</p>
             </div>
             </div>
