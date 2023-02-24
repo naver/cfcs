@@ -1,0 +1,8 @@
+{
+  "locales": ["ko"],
+  "outDir": "./packages/docs/docs/api/Core",
+  "localesDir": "./packages/docs/i18n/{locale}/docusaurus-plugin-content-docs/current/api/Core",
+  "typedoc": "./config/typedoc-core.json",
+  "tsconfig": "./tsconfig.api.json",
+  "baseUrl": "https://github.com/naver/cfcs/"
+}

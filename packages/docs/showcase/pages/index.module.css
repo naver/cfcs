@@ -1,0 +1,42 @@
+.grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+}
+
+.title {
+  font-size: var(--ifm-h4-font-size);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.desc {
+  font-size: var(--ifm-h6-font-size);
+}
+
+.thumbWrapper {
+  display: flex;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.thumb {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+
+.codesTitle {
+  margin-bottom: 10px;
+}
+.codes {
+  display: flex;
+  text-align: left;
+}
+.codes a {
+  width: 100%;
+}
+[data-theme="dark"] .thumb {
+  filter: invert(100%);
+}

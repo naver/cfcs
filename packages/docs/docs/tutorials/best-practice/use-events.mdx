@@ -1,0 +1,189 @@
+---
+title: 3. Use Events
+slug: /best-practice/use-events
+sidebar_position: 4
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+
+You can check the state value change through re-rendering in react, watchEffect in vue, and $ in svelte.
+
+If you don't use state, re-rendering won't happen.
+In addition, events are provided with a lot of information including status.
+
+
+Set the events to be exposed through the `setEvents` function.
+You just need to tell how to register the event through `on`.
+If you want to trigger an event manually without using `on`, use `emit` function.
+
+[See Function Adapter's setup](/docs/api/Core/Reactive/Interface/ReactiveSetup)
+
+
+The following code changes the `width` and `height` values when the window size is changed.
+
+```js
+import { reactive } from "@cfcs/core";
+
+const REACTIVE_ADAPTER = ({ setEvents, on, emit, onInit, onDestroy }) => {
+  setEvents(["resize"]);
+
+  const obj = reactive({
+    width: 0,
+    height: 0,
+  });
+  const onResize = e => {
+    obj.width = window.innerWidth;
+    obj.height = window.innerHeight;
+    // If you don't use the `on` function, manually trigger the event via `emit`.
+    // emit("resize", e);
+  };
+
+  on((eventName, callback) => {
+    // register
+    window.addEventListener(eventName, callback);
+    return () => {
+      // unregister
+      window.removeEventListener(eventName, callback);
+    };
+  });
+
+  onInit(() => {
+    window.addEventListener("resize", onResize);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener("resize", onResize);
+  });
+
+
+  return obj;
+};
+```
+
+
+### Frameworks
+Events in the framework can be used as calls with an `on` prefix and a name in camelcase format.
+ex) `resize` => `onResize`
+
+```js
+onResize(() => {});
+```
+<FrameworkTabs>
+  <TabItem value="react">
+The second parameter of an event in React is a dependency array, a usage similar to `useEffect`.
+
+```jsx
+import { useReactive } from "@cfcs/react";
+
+export function App() {
+  const {
+    width,
+    height,
+    onResize,
+  } = useReactive(REACTIVE_ADAPTER);
+
+  onResize(e => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+    console.log(e);
+  }, []);
+  return <div>{width}x{height}</div>;
+}
+```
+</TabItem>
+<TabItem value="vue2">
+
+State in vue is [`ref`](https://vuejs.org/api/reactivity-core.html#ref), and in `setup`, you need to access it as `.value`.
+
+
+```html
+<template>
+  <div>{width}x{height}</div>
+</template>
+<script>
+import { useReactive } from "@cfcs/vue2";
+
+export default {
+  setup() {
+    const {
+      width,
+      height,
+      onResize,
+    } = useReactive(REACTIVE_ADAPTER);
+
+    onResize(e => {
+      // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+      console.log(e);
+    });
+    return {
+      width,
+      height,
+    };
+  }
+}
+</script>
+```
+</TabItem>
+
+<TabItem value="vue3">
+
+State in vue is [`ref`](https://vuejs.org/api/reactivity-core.html#ref), and in `setup`, you need to access it as `.value`.
+
+
+
+```html
+<template>
+  <div>{width}x{height}</div>
+</template>
+<script>
+import { useReactive } from "@cfcs/vue3";
+
+export default {
+  setup() {
+    const {
+      width,
+      height,
+      onResize,
+    } = useReactive(REACTIVE_ADAPTER);
+
+    onResize(e => {
+      // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+      console.log(e);
+    });
+    return {
+      width,
+      height,
+    };
+  }
+}
+</script>
+```
+</TabItem>
+<TabItem value="svelte">
+
+The state in svelte uses [store](https://svelte.dev/docs#component-format-script-4-prefix-stores-with-$-to-access-their-values) and accesses it with $ to get the value.
+
+```html
+<script>
+import { useReactive } from "@cfcs/svelte";
+
+const {
+  width,
+  height,
+  onResize,
+} = useReactive(REACTIVE_ADAPTER);
+
+onResize(e => {
+  // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+  console.log(e);
+});
+
+</script>
+<div>{$width}x{$height}</div>
+```
+
+  </TabItem>
+</FrameworkTabs>

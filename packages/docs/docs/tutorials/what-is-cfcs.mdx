@@ -1,0 +1,96 @@
+---
+title: What is CFCs
+id: what-is-cfcs
+slug: /
+sidebar_position: 1
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+
+
+Write once, create framework components that supports React, Vue, Svelte, and more.
+
+
+## Description
+
+Many users use JavaScript frameworks and create or use components available in the framework.
+
+However, if the component you want doesn't exist, you may have to find it externally or create it yourself.
+
+Have you ever wanted to use Vanilla components in React or React components in Vue?
+
+In order to support these JavaScript frameworks, the developers of JS libraries had to learn how to use each framework, and write and maintain code for each framework separately.
+
+**CFCs**(Cross Framework Components) were developed to solve these problems.
+With **CFCs**, **one code** can support multiple frameworks according to the framework's usage.
+
+## Who should use this library?
+
+In today's web front-end development, JavaScript frameworks have become very important.
+
+The problem is that even though there are many great components, there are cases where JavaScript frameworks are not supported. Even newer JavaScript frameworks stand out even more.
+
+Typically, you can call these libraries using the `mounted` lifecycle supported by frameworks, but often you won't be able to use some of their features or even use them at all.
+
+
+
+For those who have had such experiences, we recommend using CFC.
+In particular, we recommend **CFCs** if you:
+
+
+1. **You want to develop a component to support various JavaScript frameworks.**
+2. **You want to support an existing component to the JavaScript framework**
+
+
+
+
+## Concepts
+
+Previously, if you wanted to support different JavaScript frameworks, you had to write code for each one separately.
+
+This meant that if you doubled the number of frameworks you wanted to support, the maintenance cost is also doubled.
+
+With **CFCs**, you can use Compatible to support multiple frameworks with **just one code**.
+
+
+![](/tutorials/cfcs-compatible.png)
+
+### CFCs Reactive
+CFCs Reactive can support multiple frameworks as a Reactive Component, a utility component that is state-based and does not create a UI.
+
+
+![](/tutorials/cfcs-reactive.png)
+
+
+
+**Reactive State** is a state that changes according to a specific condition.
+
+You can detect state changes and also create a UI that changes based on conditions.
+
+
+* [**See Reactive Documents**](https://github.com/naver/cfcs/blob/main/reactive.md)
+
+
+#### CFCs Reactive-style components
+* [ImReady](https://github.com/naver/egjs-imready): I'm Ready to check if the images or videos are loaded.
+* [Axes](https://github.com/naver/egjs-axes): You can easily create a UI that responds to user actions.
+* [Conveyer](https://github.com/naver/egjs-conveyer): Drag gestures to your Native Scroll.
+
+
+
+### CFCs DOM
+
+CFCs DOM supports various frameworks by delegating the DOM render function to the framework. (Soon)
+
+![](/tutorials/cfcs-dom.png)
+
+
+#### CFCs DOM-style components
+* [Flicking](https://github.com/naver/egjs-flicking): It's reliable, flexible and extendable carousel.
+* [InfiniteGrid](https://github.com/naver/egjs-infinitegrid): Arrange elements including content infinitely according to grid type.
+* [Grid](https://github.com/naver/egjs-grid): Arrange items according to the type of grids.
+* [View 360](https://github.com/naver/egjs-view360): 360° panorama image / video viewer.
+* [View 3D](https://github.com/naver/egjs-view3d): Fast & Customizable glTF 3D model viewer.
+

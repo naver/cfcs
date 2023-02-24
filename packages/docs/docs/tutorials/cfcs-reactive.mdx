@@ -1,0 +1,58 @@
+---
+title: CFCs Reactive
+id: cfcs-reactive
+slug: /cfcs-reactive
+sidebar_position: 2
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+
+CFCs Reactive can support multiple frameworks as a Reactive Component, a utility component that is state-based and does not create a UI.
+
+CFCs Reactive consists of `methods`, `events`, and **`state`**.
+
+![](/tutorials/cfcs-reactive.png)
+
+
+**Reactive State** is a state that changes according to a specific condition.
+You can detect state changes and also create a UI that changes based on conditions.
+
+
+If you can get properties through events you would use something like this:
+
+```js
+// AS-IS
+inst.on("event1", e => {
+  console.log(e.prop1);
+});
+inst.on("event2", e => {
+  console.log(e.prop1);
+});
+```
+
+However, if you want to read the status value directly rather than an event,
+```js
+// TO-BE
+console.log(inst.prop1);
+```
+
+If you want to directly detect the state value, you can use it in the following way.
+
+```js
+// TO-BE
+inst.subscribe("prop1", nextValue => {
+  console.log(nextValue);
+});
+```
+
+In this case, state detection is more intuitive than event detection.
+
+
+#### CFCs Reactive-style components
+* [ImReady](https://github.com/naver/egjs-imready): I'm Ready to check if the images or videos are loaded.
+* [Axes](https://github.com/naver/egjs-axes): You can easily create a UI that responds to user actions.
+* [Conveyer](https://github.com/naver/egjs-conveyer): Drag gestures to your Native Scroll.

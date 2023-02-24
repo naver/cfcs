@@ -1,0 +1,63 @@
+{
+  "name": "@cfcs/vue2",
+  "version": "0.0.26",
+  "description": "CFCs(Cross Framework Components) are modules that convert components into framework usage for Vue 2",
+  "main": "dist/cfcs.cjs.js",
+  "module": "dist/cfcs.esm.js",
+  "types": "declaration/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "build": "rollup -c && npm run declaration && print-sizes ./dist ",
+    "declaration": "rm -rf declaration && tsc -p tsconfig.declaration.json"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naver/cfcs"
+  },
+  "author": {
+    "name": "NAVER Corp."
+  },
+  "keywords": [
+    "cfcs",
+    "cfc",
+    "vue2",
+    "vue",
+    "vue-hook",
+    "vue-hooks",
+    "vue-use",
+    "scroll",
+    "reactive",
+    "hooks",
+    "use"
+  ],
+  "files": [
+    "./*",
+    "dist/*"
+  ],
+  "dependencies": {
+    "@cfcs/core": "~0.0.26"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@egjs/build-helper": "^0.1.2",
+    "@typescript-eslint/parser": "^2.33.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/composition-api": "^1.2.4",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^5.0.2",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "print-sizes": "^0.1.0",
+    "rollup-plugin-vue": "^5.1.9",
+    "tslib": "^2.3.1",
+    "typescript": "^4.1.6",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

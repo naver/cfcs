@@ -1,0 +1,270 @@
+---
+title: useKey
+slug: /examples/use-key
+sidebar_position: 3
+---
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+import { KeyApp } from "./components/KeyApp";
+
+
+
+This is an example to check which key was pressed.
+
+
+The state of `isKeydown` changes to true when a key is pressed in the input, and false when keyup is performed.
+
+When multiple keys are pressed, the state of `keys` changes.
+
+<div className="app-container">
+  <KeyApp />
+</div>
+
+### Reactive Adapter
+
+
+```ts
+const REACTIVE_ADAPTER = ({ onInit, onDestroy, getProps }) => {
+  const obj = reactive({
+    keys: [],
+    isKeydown: false,
+  });
+  const ref = getProps().ref;
+
+  const onKeydown = e => {
+    const keys = obj.keys;
+    const key = e.key;
+
+    if (keys.includes(key)) {
+      return;
+    }
+    obj.keys = [...keys, e.key].sort((a, b) => a < b ? -1 : 1);
+    obj.isKeydown = true;
+  };
+  const onKeyup = e => {
+    const keys = obj.keys;
+    const key = e.key;
+    const index = keys.indexOf(key);
+
+    if (index === -1) {
+      return;
+    }
+    keys.splice(index, 1);
+    obj.keys = [...keys];
+    obj.isKeydown = !!keys.length;
+  };
+  const onBlur = () => {
+    if (!obj.keys.length) {
+      return;
+    }
+    obj.keys = [];
+    obj.isKeydown = false;
+  }
+  onInit(() => {
+    const element = ref.value || ref.current;
+
+
+    element?.addEventListener("keydown", onKeydown);
+    element?.addEventListener("keyup", onKeyup);
+    element?.addEventListener("keyup", onBlur);
+  });
+
+  onDestroy(() => {
+    const element = ref.value || ref.current;
+
+    element?.removeEventListener("keydown", onKeydown);
+    element?.removeEventListener("keyup", onKeyup);
+    element?.removeEventListener("keyup", onBlur);
+  });
+  return obj;
+};
+```
+
+
+
+### Frameworks
+
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+You can create a Reactive Component by importing the `@cfcs/react` module and using the `useReactive` function.
+<p />
+
+```jsx
+import React from "react";
+import { useReactive } from "@cfcs/react";
+
+function useScroll() {
+  const ref = React.useRef(null);
+
+  return Object.assign(useReactive(ADAPTER, () => ({ ref })), {
+    ref,
+  });
+}
+```
+```jsx
+export function App() {
+  const { isKeydown, keys, ref } = useScroll();
+
+  return <div>
+    * isKeydown: {isKeydown ? "true" : "false"} <br />
+    * selected keys: {keys.join(" + ")} <br />
+    <input ref={ref} />
+  </div>;
+}
+```
+
+  </TabItem>
+  <TabItem value="vue2">
+
+You can create a Reactive Component by importing the `@cfcs/vue2` module and using the `useReactive` function.
+
+<p />
+
+
+Use [`@vue/composition-api`](https://github.com/vuejs/composition-api) if you are going to use it in Vue 2.
+
+
+<p />
+
+```sh
+# < 2.7
+$ npm install @cfcs/vue2
+```
+
+```jsx
+import { ref } from "@vue/composition-api";
+import { useReactive } from "@cfcs/vue2";
+
+function useScroll() {
+  const imgRef = ref(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref: imgRef })),
+    ref: imgRef,
+  };
+}
+```
+```html
+<template>
+  <div>
+    * isKeydown: {{isKeydown ? "true" : "false"}} <br />
+    * selected keys: {{keys.join(" + ")}} <br />
+    <input ref="ref">...</input>
+  </div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      isKeydown,
+      keys,
+      ref,
+    } = useScroll();
+
+    return {
+      isKeydown,
+      keys,
+      ref,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="vue3">
+
+  You can create a Reactive Component by importing the `@cfcs/vue3` module and using the `useReactive` function.
+
+<p />
+
+
+```sh
+# >= 2.7
+$ npm install @cfcs/vue3
+```
+
+```jsx
+import { ref } from "vue";
+import { useReactive } from "@cfcs/vue3";
+
+function useScroll() {
+  const imgRef = ref(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref: imgRef })),
+    ref: imgRef,
+  };
+}
+```
+```html
+<template>
+  <div>
+    * isKeydown: {{isKeydown ? "true" : "false"}} <br />
+    * selected keys: {{keys.join(" + ")}} <br />
+    <input ref="ref">...</input>
+  </div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      isKeydown,
+      keys,
+      ref,
+    } = useScroll();
+
+    return {
+      isKeydown,
+      keys,
+      ref,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="svelte">
+
+You can create a Reactive Component by importing the `@cfcs/svelte` module and using the `useReactive` function.
+
+
+<p />
+
+```sh
+$ npm install @cfcs/svelte
+```
+```jsx
+import { useReactive, useRef } from "@cfcs/vue3";
+
+function useScroll() {
+  const ref = useRef(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref })),
+    ref,
+  };
+}
+```
+
+```html
+<script>
+const {
+  ref: inputRef,
+  isKeydown,
+  keys,
+} = useScroll();
+</script>
+<div>
+  * isKeydown: {$isKeydown ? "true" : "false"} <br />
+  * selected keys: {$keys.join(" + ")} <br />
+  <input use:inputRef>...</input>
+</div>
+```
+  </TabItem>
+</FrameworkTabs>

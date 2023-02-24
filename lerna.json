@@ -1,0 +1,26 @@
+{
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "packages": [
+    "packages/*",
+    "packages/angular/projects/angular"
+  ],
+  "useNx": false,
+  "version": "independent",
+  "lernaHelperOptions": {
+    "deployFileMap": [
+      {
+        "basePath": "packages/core/dist",
+        "dists": [
+          "demo/release/{{version}}/dist",
+          "demo/release/latest/dist"
+        ]
+      }
+    ],
+    "beforeReleaseScripts": [
+      "npm run packages:build",
+      "npm run demo:build",
+      "npm run demo:deploy"
+    ]
+  }
+}

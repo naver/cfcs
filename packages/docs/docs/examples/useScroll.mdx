@@ -1,0 +1,250 @@
+---
+title: useScroll
+slug: /examples/use-scroll
+sidebar_position: 3
+---
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import { FrameworkTabs } from "@site/src/components/FrameworkTabs";
+
+
+import { ScrollApp } from "./components/ScrollApp";
+
+
+This is an example of a Reactive Component that can get the scroll position of the element and whether or not the starting point (or ending point) has been reached.
+
+Try scrolling horizontally on the next screen.
+
+`scrollPos` when the scroll changes, `isReachStart` when the scroll reaches the start point, and `isReachEnd` when the scroll reaches the end point.
+
+<div className="app-container">
+  <ScrollApp />
+</div>
+
+### Reactive Adapter
+
+```js
+const REACTIVE_ADAPTER = ({ onInit, onDestroy, getProps }) => {
+  const obj = reactive({
+    isReachStart: false,
+    isReachEnd: false,
+  });
+  const ref = getProps().ref;
+
+  const onScroll = () => {
+    const element = ref.value || ref.current;
+    const scrollLeft = element.scrollLeft;
+    obj.isReachStart = scrollLeft === 0;
+    obj.isReachEnd = scrollLeft === element.scrollWidth - element.clientWidth;
+  };
+  onInit(() => {
+    const element = ref.value || ref.current;
+
+    element?.addEventListener("scroll", onScroll);
+    onScroll();
+  });
+
+  onDestroy(() => {
+    const element = ref.value || ref.current;
+
+    element?.removeEventListener("scroll", onScroll);
+  });
+  return obj;
+};
+```
+
+
+### Frameworks
+
+
+<FrameworkTabs>
+  <TabItem value="react">
+
+You can create a Reactive Component by importing the `@cfcs/react` module and using the `useReactive` function.
+<p />
+
+```jsx
+import React from "react";
+import { useReactive } from "@cfcs/react";
+
+function useScroll() {
+  const ref = React.useRef(null);
+
+  return Object.assign(useReactive(ADAPTER, () => ({ ref })), {
+    ref,
+  });
+}
+```
+```jsx
+export function App() {
+  const { scrollPos, isReachStart, isReachEnd, ref } = useScroll();
+
+  return <div>
+    * pos: {scrollPos} <br />
+    * start: {isReachStart ? "reached": "not reached"} <br />
+    * end: {isReachEnd ? "reached" : "not reached"}
+    <div className="scroll-container" ref={ref}>...</div>
+  </div>;
+}
+```
+
+  </TabItem>
+  <TabItem value="vue2">
+
+You can create a Reactive Component by importing the `@cfcs/vue2` module and using the `useReactive` function.
+
+<p />
+
+
+Use [`@vue/composition-api`](https://github.com/vuejs/composition-api) if you are going to use it in Vue 2.
+
+
+<p />
+
+```sh
+# < 2.7
+$ npm install @cfcs/vue2
+```
+
+```jsx
+import { ref } from "@vue/composition-api";
+import { useReactive } from "@cfcs/vue2";
+
+function useScroll() {
+  const imgRef = ref(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref: imgRef })),
+    ref: imgRef,
+  };
+}
+```
+```html
+<template>
+  <div>
+    * pos: {{scrollPos}} <br />
+    * start: {{isReachStart ? "reached": "not reached"}} <br />
+    * end: {{isReachEnd ? "reached" : "not reached"}}
+    <div class="scroll-container" ref="ref">...</div>
+  </div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      scrollPos,
+      isReachStart,
+      isReachEnd,
+      ref,
+    } = useScroll();
+
+    return {
+      scrollPos,
+      isReachStart,
+      isReachEnd,
+      ref,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="vue3">
+
+  You can create a Reactive Component by importing the `@cfcs/vue3` module and using the `useReactive` function.
+
+<p />
+
+
+```sh
+# >= 2.7
+$ npm install @cfcs/vue3
+```
+
+```jsx
+import { ref } from "vue";
+import { useReactive } from "@cfcs/vue3";
+
+function useScroll() {
+  const imgRef = ref(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref: imgRef })),
+    ref: imgRef,
+  };
+}
+```
+```html
+<template>
+  <div>
+    * pos: {{scrollPos}} <br />
+    * start: {{isReachStart ? "reached": "not reached"}} <br />
+    * end: {{isReachEnd ? "reached" : "not reached"}}
+    <div class="scroll-container" ref="ref">...</div>
+  </div>
+</template>
+<script>
+export default {
+  setup() {
+    const {
+      scrollPos,
+      isReachStart,
+      isReachEnd,
+      ref,
+    } = useScroll();
+
+    return {
+      scrollPos,
+      isReachStart,
+      isReachEnd,
+      ref,
+    };
+  }
+}
+</script>
+```
+
+  </TabItem>
+  <TabItem value="svelte">
+
+You can create a Reactive Component by importing the `@cfcs/svelte` module and using the `useReactive` function.
+
+
+<p />
+
+```sh
+$ npm install @cfcs/svelte
+```
+```jsx
+import { useReactive, useRef } from "@cfcs/vue3";
+
+function useScroll() {
+  const ref = useRef(null);
+
+  return {
+    ...useReactive(ADAPTER, () => ({ ref })),
+    ref,
+  };
+}
+```
+
+```html
+<script>
+const {
+  ref: scrollRef,
+  scrollPos,
+  isReachStart,
+  isReachEnd,
+} = useScroll();
+</script>
+<div>
+  * pos: {$scrollPos} <br />
+  * start: {$isReachStart ? "reached": "not reached"} <br />
+  * end: {$isReachEnd ? "reached" : "not reached"}
+  <div class="scroll-container" use:scrollRef>...</div>
+</div>
+```
+  </TabItem>
+</FrameworkTabs>

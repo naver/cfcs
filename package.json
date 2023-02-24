@@ -1,0 +1,32 @@
+{
+  "name": "cfcs-root",
+  "description": "CFCs(Cross Framework Components) are modules that convert components into framework usage.",
+  "private": true,
+  "scripts": {
+    "packages": "npm run packages:update && npm run packages:build && npm run packages:publish",
+    "packages:update": "lerna-helper version",
+    "packages:build": "npm run build --prefix packages/core && lerna run build --ignore @cfcs/core --ignore @cfcs/angular --ignore docs --stream",
+    "packages:publish": "lerna-helper publish --ignore @cfcs/angular --commit 'chore: update packages versions'",
+    "changelog": "lerna-helper changelog --type all --base @cfcs/core",
+    "docs:build": "yarn docs:core && yarn docs:react && yarn docs:vue2 && yarn docs:vue3 && yarn docs:svelte",
+    "docs:core": "typedoc-to-mdx -c ./config/ttmdx-core.json",
+    "docs:react": "typedoc-to-mdx -c ./config/ttmdx-react.json",
+    "docs:vue2": "typedoc-to-mdx -c ./config/ttmdx-vue2.json",
+    "docs:vue3": "typedoc-to-mdx -c ./config/ttmdx-vue3.json",
+    "docs:svelte": "typedoc-to-mdx -c ./config/ttmdx-svelte.json",
+    "demo:build": "npm run docs:build && npm run packages:build && npm run build --prefix packages/docs",
+    "demo:deploy": "lerna-helper deploy --base @cfcs/core --remote upstream",
+    "release": "lerna-helper release --base @cfcs/core --remote upstream --branch main"
+  },
+  "devDependencies": {
+    "@egjs/release-helper": "^0.2.9",
+    "lerna": "^4.0.0",
+    "typedoc-to-mdx": "^0.1.0"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "packages/angular/projects/angular"
+    ]
+  }
+}
