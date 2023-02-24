@@ -64,8 +64,7 @@ export default () => {
         </div>
         <h1>Cross Framework Components</h1>
         <p className="home-description">
-          CFCs(Cross Framework Components) are modules that convert components
-          into framework usage.
+          Write once, create framework components that supports React, Vue, Svelte, and more.
         </p>
         <a
           className="home-button button button--outline button--primary"
