@@ -11,10 +11,11 @@
     "build": "rollup -c && npm run declaration && print-sizes ./dist ",
     "declaration": "rm -rf declaration && tsc -p tsconfig.declaration.json"
   },
+  "homepage": "https://naver.github.io/cfcs",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/naver/cfcs"
+    "url": "https://github.com/naver/cfcs/tree/main/packages/react"
   },
   "author": {
     "name": "NAVER Corp."

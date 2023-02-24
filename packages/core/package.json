@@ -12,9 +12,10 @@
     "test": "jest --watchAll",
     "lint": "eslint ./src/ --ext .ts"
   },
+  "homepage": "https://naver.github.io/cfcs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/naver/cfcs"
+    "url": "https://github.com/naver/cfcs/tree/main/packages/core"
   },
   "author": "NAVER Crop.",
   "license": "MIT",

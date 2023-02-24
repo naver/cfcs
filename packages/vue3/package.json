@@ -13,9 +13,10 @@
     "declaration": "rm -rf declaration && tsc -p tsconfig.declaration.json"
   },
   "license": "MIT",
+  "homepage": "https://naver.github.io/cfcs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/naver/cfcs"
+    "url": "https://github.com/naver/cfcs/tree/main/packages/vue3"
   },
   "author": {
     "name": "NAVER Corp."

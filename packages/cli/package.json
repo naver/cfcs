@@ -12,6 +12,7 @@
     "build": "tsc -p tsconfig.json && print-sizes ./dist"
   },
   "license": "MIT",
+  "homepage": "https://naver.github.io/cfcs",
   "repository": {
     "type": "git",
     "url": "https://github.com/naver/cfcs"
