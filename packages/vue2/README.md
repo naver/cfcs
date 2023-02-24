@@ -2,16 +2,18 @@
 <p align="center"></p>
 
 <h2 align="center" style="max-width: 100%;">
-  <img src="../../logo.png" /><br/>
+  <img src="https://raw.githubusercontent.com/naver/cfcs/main/images/logo.png" /><br/>
   <a href="#">Cross Framework Components for Vue 2</a>
 </h2>
-
+<p align="center">Write once, create framework components that supports React, Vue, Svelte, and more.</p>
 <p align="middle">
 <a href="https://www.npmjs.com/package/@cfcs/vue2" target="_blank"><img src="https://img.shields.io/npm/v/@cfcs/vue2.svg?style=flat-square&color=00d8ff&label=version&logo=NPM"></a>&nbsp;
 <img src="https://img.shields.io/badge/language-typescript-blue.svg?style=flat-square" />&nbsp;
 <a href="https://github.com/naver/cfcs/blob/main/LICENSE" target="_blank"><img alt="GitHub" src="https://img.shields.io/github/license/naver/cfcs.svg?style=flat-square&label=%F0%9F%93%9C%20license&color=08CE5D" /></a>&nbsp;
 </p>
-<p align="center">CFCs(Cross Framework Components) are modules that convert components into framework usage for Vue 2.</p>
+<h3 align="center">
+  <a href="https://naver.github.io/cfcs/">Demo</a> / <a href="https://naver.github.io/cfcs/docs/api/Core/Reactive/Function/reactive">API</a> / <a href="https://naver.github.io/cfcs/docs">Tutorials</a>
+</h3>
 
 
 ## ⚙️ Installation

@@ -2,7 +2,7 @@
 <p align="center"></p>
 
 <h2 align="center" style="max-width: 100%;">
-  <img src="../../logo.png" /><br/>
+  <img src="https://raw.githubusercontent.com/naver/cfcs/main/images/logo.png" /><br/>
   <a href="#">Cross Framework Components for Svelte</a>
 </h2>
 
@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/language-typescript-blue.svg?style=flat-square" />&nbsp;
 <a href="https://github.com/naver/cfcs/blob/main/LICENSE" target="_blank"><img alt="GitHub" src="https://img.shields.io/github/license/naver/cfcs.svg?style=flat-square&label=%F0%9F%93%9C%20license&color=08CE5D" /></a>&nbsp;
 </p>
-<p align="center">CFCs(Cross Framework Components) are modules that convert components into framework usage for Svelte.</p>
+<p align="center">Write once, create framework components that supports React, Vue, Svelte, and more.</p>
 
 
 ## ⚙️ Installation

@@ -22,6 +22,12 @@
   <a href="https://github.com/naver/cfcs/tree/main/packages/svelte"><img alt="Svelte" src="https://img.shields.io/static/v1.svg?label=&message=Svelte&style=flat-square&logo=svelte&logoColor=white&color=FF3E00" /></a>
 </p>
 
+
+<h3 align="center">
+  <a href="https://naver.github.io/cfcs/">Demo</a> / <a href="https://naver.github.io/cfcs/docs/api/Core/Reactive/Function/reactive">API</a> / <a href="https://naver.github.io/cfcs/docs">Tutorials</a>
+</h3>
+
+
 ## Description
 
 Many users use JavaScript frameworks and create or use components available in the framework.
@@ -50,7 +56,7 @@ In particular, we recommend **CFCs** if you:
 
 
 1. **You want to develop a component to support various JavaScript frameworks.**
-2. **You want to support an existing component to the JavaScript framework**
+2. **You want to support existing components to various JavasScript frameworks.**
 
 
 
@@ -61,13 +67,13 @@ This meant that if you doubled the number of frameworks you wanted to support, t
 
 With **CFCs**, you can use Compatible to support multiple frameworks with **just one code**.
 
-![](./images/cfcs-compatible.png)
+/images/cfcs-compatible.png)
 
 ### CFCs Reactive
 
 **CFCs Reactive** can support multiple frameworks as a Reactive Component, a utility component that is state-based and does not create a UI.
 
-![](./images/cfcs-reactive.png)
+![](https://raw.githubusercontent.com/naver/cfcs/main/images/cfcs-reactive.png)
 
 
 **Reactive State** is a state that changes according to a specific condition.

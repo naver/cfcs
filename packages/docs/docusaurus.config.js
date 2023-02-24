@@ -9,7 +9,7 @@ const corePkg = require("../core/package.json");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Cross Framework Components",
-  tagline: "CFCs(Cross Framework Components) are modules that convert components into framework usage.",
+  tagline: "Write once, create framework components that supports React, Vue, Svelte, and more.",
   url: "https://naver.github.io",
   baseUrl: "/cfcs/",
   onBrokenLinks: "throw",

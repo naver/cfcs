@@ -1,6 +1,6 @@
 {
   "name": "cfcs-root",
-  "description": "CFCs(Cross Framework Components) are modules that convert components into framework usage.",
+  "description": "Write once, create framework components that supports React, Vue, Svelte, and more.",
   "private": true,
   "scripts": {
     "packages": "npm run packages:update && npm run packages:build && npm run packages:publish",

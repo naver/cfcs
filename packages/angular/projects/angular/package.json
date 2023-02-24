@@ -1,7 +1,7 @@
 {
   "name": "@cfcs/angular",
   "version": "0.0.26",
-  "description": "CFCs(Cross Framework Components) are modules that convert components into framework usage for Angular",
+  "description": "Write once, create framework components that supports React, Vue, Svelte, and more.",
   "author": {
     "name": "NAVER Corp."
   },

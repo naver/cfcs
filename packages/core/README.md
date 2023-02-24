@@ -6,7 +6,7 @@
   <a href="#">Cross Framework Components</a>
 </h2>
 
-<p align="center">CFCs(Cross Framework Components) are modules that convert components into framework usage.</p>
+<p align="center">Write once, create framework components that supports React, Vue, Svelte, and more.</p>
 
 
 <p align="middle">
@@ -21,6 +21,11 @@
   <a href="https://github.com/naver/cfcs/tree/main/packages/vue3"><img alt="Vue3" src="https://img.shields.io/static/v1.svg?label=&message=Vue3&style=flat-square&logo=Vue.js&logoColor=white&color=42b883" /></a>
   <a href="https://github.com/naver/cfcs/tree/main/packages/svelte"><img alt="Svelte" src="https://img.shields.io/static/v1.svg?label=&message=Svelte&style=flat-square&logo=svelte&logoColor=white&color=FF3E00" /></a>
 </p>
+
+
+<h3 align="center">
+  <a href="https://naver.github.io/cfcs/">Demo</a> / <a href="https://naver.github.io/cfcs/docs/api/Core/Reactive/Function/reactive">API</a> / <a href="https://naver.github.io/cfcs/docs">Tutorials</a>
+</h3>
 
 ## ⚙️ Installation
 ```sh

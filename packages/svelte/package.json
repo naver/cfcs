@@ -1,7 +1,7 @@
 {
   "name": "@cfcs/svelte",
   "version": "0.0.26",
-  "description": "CFCs(Cross Framework Components) are modules that convert components into framework usage for Svelte",
+  "description": "Write once, create framework components that supports React, Vue, Svelte, and more.",
   "main": "dist/cfcs.cjs.js",
   "module": "dist/cfcs.esm.js",
   "svelte": "dist/cfcs.esm.js",

@@ -6,7 +6,7 @@
 
 CFCs Reactive can support multiple frameworks as a Reactive Component, a utility component that is state-based and does not create a UI.
 
-![](./images/cfcs-reactive.png)
+![](https://raw.githubusercontent.com/naver/cfcs/main/images/cfcs-reactive.png)
 
 
 
@@ -119,7 +119,7 @@ So, to support vanilla components in the framework, CFCs provide compatible adap
 
 CFCs provide several lifecycles and functions, and can be applied to various frameworks by writing usage accordingly.
 
-![](./images/cfcs-lifecycle.png)
+![](https://raw.githubusercontent.com/naver/cfcs/main/images/cfcs-lifecycle.png)
 
 * `created`: Lifecycle that occurs when a component is called (or created).
   * Initialize `state`, `methods`, and `events` to be exposed.
