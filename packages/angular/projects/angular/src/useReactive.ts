@@ -47,10 +47,8 @@ export function useReactive<
       const callback = (...args: any[]) => {
         ((self as any)[camelize(`ngx ${name as string}`)] as EventEmitter<any>).emit(...args);
       };
-      events.forEach((name, i) => {
-        adaptResult.on(name as any, callback);
-      });
 
+      adaptResult.on(name as any, callback);
       return callback;
     });
     adaptResult.init();
