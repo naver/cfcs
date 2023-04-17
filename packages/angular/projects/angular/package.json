@@ -21,7 +21,6 @@
     "directive"
   ],
   "dependencies": {
-    "@cfcs/core": "~0.1.0",
-    "tslib": "^2.3.0"
+    "@cfcs/core": "~0.1.0"
   }
 }
