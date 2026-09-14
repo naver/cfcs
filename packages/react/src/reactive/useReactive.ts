@@ -96,6 +96,8 @@ export function useReactive<
     result[camelize(`on ${name as any}`)] = (callback: (e: any) => void, dependencies?: readonly any[]) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const listener = useMemo(() => {
+        // strict mode: render => off on => off on => effect
+        adaptResult.off(name as any, callback as any);
         adaptResult.on(name as any, callback as any);
         return callback;
       }, dependencies);
